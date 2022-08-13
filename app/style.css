@@ -1,0 +1,238 @@
+/* Google Fonts Import Link */
+@import url("https://fonts.googleapis.com/css2?family=Tiro+Tamil:ital@0;1&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+}
+
+body {
+  font-family: "Tiro Tamil", serif;
+  color: #35432f;
+}
+
+/* header */
+.header-container {
+  height: 100vh;
+  background: #f7cb7a;
+}
+
+.header-container h1 {
+  position: absolute;
+  top: 40vh;
+  width: 100%;
+  font-size: 6rem;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+/* intro section */
+.intro {
+  height: 75vh;
+  background: #f7cb7a;
+}
+
+.intro-description {
+  position: absolute;
+  right: 5%;
+  top: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.intro-description li {
+  height: 4rem;
+  display: flex;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+  justify-content: flex-end;
+}
+
+.intro-description span {
+  display: block;
+  font-size: 2.25rem;
+}
+
+.intro-description span.active {
+  transform: translateY(0%);
+  transition: 1s ease-out;
+}
+
+/* intro form text */
+.intro-form {
+  height: 80vh;
+  background: #f7cb7a;
+  scroll-snap-align: end;
+}
+
+.intro-form-text {
+  position: absolute;
+  right: 5%;
+  height: 4rem;
+  font-size: 2.25rem;
+  display: block;
+}
+
+.intro-form form {
+  position: absolute;
+  right: 5%;
+  top: 185vh;
+}
+
+.intro-form li {
+  display: flex;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+  justify-content: flex-end;
+}
+
+.intro-form-text-end {
+  right: 5%;
+  height: 4rem;
+  font-size: 2.25rem;
+  margin-top: 80px;
+}
+
+/* intro form */
+.header-input {
+  border: none;
+  background: #e3d8e7;
+  border-radius: 3px;
+  width: 280px;
+  position: relative;
+  font-size: 1rem;
+  text-align: center;
+  justify-items: right;
+  height: 2rem;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-left: 1rem;
+}
+
+.header-questions {
+  line-height: 2rem;
+  font-size: 1.25rem;
+  text-align: right;
+  padding-bottom: 1.25rem;
+}
+
+.header-submit-button {
+  border: none;
+  background: #a7c7df;
+  border-radius: 3px;
+  width: 100px;
+  height: 2rem;
+  margin-left: 10px;
+  position: relative;
+  font-size: 1rem;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #35432f;
+}
+
+/* 2 column layout for main page */
+section {
+  height: 100vh;
+  display: flex;
+}
+
+nav {
+  width: 20%;
+  height: 100vh;
+  background: #35432f;
+  padding-left: 20px;
+}
+
+/* sidebar */
+.sidebar {
+  padding: 10vh 2vh 2vh 2vh;
+  margin: 0;
+}
+
+.sidebar-heading {
+  font-size: 2rem;
+  color: #e3d8e7;
+  padding-bottom: 2vh;
+}
+
+.sidebar-subheading {
+  font-size: 1rem;
+  color: #f7cb7a;
+  padding-bottom: 20vh;
+}
+
+.search-by-category li {
+  position: relative;
+}
+
+.search-by-category li a {
+  display: relative;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 0;
+}
+
+.category-name {
+  color: #f2f1ed;
+}
+
+a {
+  text-decoration: none;
+}
+
+main {
+  width: 80%;
+  height: 100vh;
+  background: #e3d8e7;
+  display: absolute;
+  justify-content: center;
+  align-items: center;
+}
+
+h2 {
+  font-size: 2rem;
+  color: #35432f;
+  font-style: italic;
+  padding-top: 5vh;
+}
+
+h2.plan-title {
+  text-align: left;
+  margin-left: 5rem;
+}
+
+.search-by-keyword,
+.add-my-own {
+  padding: 0.25rem;
+  border: none;
+  background: #e3d8e7;
+  font-family: Arial, Helvetica, sans-serif;
+  border-radius: 3px;
+  font-size: 0.8rem;
+}
+
+input .search-by-keyword,
+input .add-my-own {
+  width: 100vh;
+}
+
+main div {
+  display: flex;
+  align-items: center;
+  margin: 1rem 5rem;
+}
+
+main div li {
+  text-align: left;
+  padding-top: 0.25rem;
+}
+
+.remove-button {
+  padding: 0.25rem;
+  margin-right: 0.5rem;
+  border: none;
+  color: #35432f;
+  cursor: pointer;
+}
