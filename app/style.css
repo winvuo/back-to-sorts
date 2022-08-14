@@ -160,7 +160,19 @@ nav {
 .sidebar-subheading {
   font-size: 1rem;
   color: #f7cb7a;
-  padding-bottom: 20vh;
+}
+
+.rendered-sidebar-text {
+  font-size: 0.9rem;
+  color: white;
+  padding: 0.2rem 0;
+}
+
+#search-by-category,
+#search-by-keyword,
+#search-by-keyword,
+#add-your-own {
+  padding: 2rem 0 0 0;
 }
 
 .search-by-category li {

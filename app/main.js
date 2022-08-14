@@ -5,16 +5,30 @@ const supabaseUrl = "https://srfxftfqnjzhjapmpmlb.supabase.co";
 const supabaseKey = process.env.SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-async function loadData() {
-  let { data: activities, error } = await supabase
-    .from("activities")
-    .select("activity");
-
-  console.log(error);
-  console.log(activities);
+function turnResponseIntoJSObject(response) {
+  return response.json();
 }
 
-loadData();
+async function loadCategoryNames() {
+  let { data: categories, error } = await supabase
+    .from("categories")
+    .select("category_name");
+
+  const categoryContainer = document.querySelector(".search-by-category");
+  return categories.forEach((category) => {
+    let newCategory = document.createElement("li");
+    newCategory.classList = "rendered-sidebar-text";
+    newCategory.innerHTML = `* ${category.category_name}`;
+    categoryContainer.appendChild(newCategory);
+  });
+  // return categories.forEach((category) => {
+  //   let newCategory = document.createElement("li");
+  //   newCategory.innerText = category;
+  //   categoryContainer.appendChild(newCategory);
+  // });
+}
+
+loadCategoryNames();
 
 // Query Selectors
 const ownActivityInput = document.querySelector("input.add-my-own");
