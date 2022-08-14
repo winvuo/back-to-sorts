@@ -162,10 +162,14 @@ nav {
   color: #f7cb7a;
 }
 
-.rendered-sidebar-text {
+.rendered-category-text {
   font-size: 0.9rem;
-  color: white;
+  color: #f2f1ed;
   padding: 0.2rem 0;
+}
+
+.rendered-category-text:hover {
+  color: #a7c7df;
 }
 
 #search-by-category,
@@ -213,6 +217,7 @@ h2 {
 h2.plan-title {
   text-align: left;
   margin-left: 5rem;
+  color: #c54b25;
 }
 
 .search-by-keyword,

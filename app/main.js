@@ -1,34 +1,36 @@
 import { createClient } from "@supabase/supabase-js";
 import "dotenv/config";
 
+// fetch database from Supabase API
 const supabaseUrl = "https://srfxftfqnjzhjapmpmlb.supabase.co";
 const supabaseKey = process.env.SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-function turnResponseIntoJSObject(response) {
-  return response.json();
-}
+const categoryContainer = document.querySelector(".search-by-category");
 
-async function loadCategoryNames() {
-  let { data: categories, error } = await supabase
-    .from("categories")
-    .select("category_name");
+async function loadCategories() {
+  let { data: categories } = await supabase.from("categories").select("*");
 
-  const categoryContainer = document.querySelector(".search-by-category");
-  return categories.forEach((category) => {
-    let newCategory = document.createElement("li");
-    newCategory.classList = "rendered-sidebar-text";
-    newCategory.innerHTML = `* ${category.category_name}`;
-    categoryContainer.appendChild(newCategory);
+  let { data: activities } = await supabase.from("activities").select("*");
+
+  categories.forEach((data) => {
+    const renderCategory = document.createElement("ul");
+    renderCategory.classList = "rendered-category-text";
+    renderCategory.innerHTML = `* ${data.category_name}`;
+    categoryContainer.appendChild(renderCategory);
+    let dataID = data.id;
+
+    let filteredActivities = activities.forEach((data) => {
+      if (data.category === dataID) {
+        let renderListItem = document.createElement("li");
+        renderListItem.innerHTML = data.activity;
+        renderCategory.appendChild(renderListItem);
+      }
+    });
   });
-  // return categories.forEach((category) => {
-  //   let newCategory = document.createElement("li");
-  //   newCategory.innerText = category;
-  //   categoryContainer.appendChild(newCategory);
-  // });
 }
 
-loadCategoryNames();
+loadCategories();
 
 // Query Selectors
 const ownActivityInput = document.querySelector("input.add-my-own");
