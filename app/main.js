@@ -13,26 +13,21 @@ async function loadCategories() {
   let { data: activities } = await supabase.from("activities").select("*");
 
   categories.forEach((data) => {
-    const renderCategory = document.createElement("ul");
+    const renderCategory = document.createElement("details");
     renderCategory.classList = "rendered-category-text";
-    renderCategory.innerHTML = `* ${data.category_name}`;
+    const summary = document.createElement("summary");
+    summary.innerHTML = `${data.category_name}`;
+    renderCategory.appendChild(summary);
     categoryContainer.appendChild(renderCategory);
     let dataID = data.id;
-
     activities.forEach((data) => {
       if (data.category === dataID) {
-        let renderListItem = document.createElement("li");
+        let renderListItem = document.createElement("p");
         renderListItem.classList = "rendered-category-activity-text";
         renderListItem.innerHTML = data.activity;
         renderCategory.appendChild(renderListItem);
-        renderListItem.style.display = "none";
 
-        renderCategory.addEventListener("click", () => {
-          let childList = renderCategory.children;
-          for (const list of childList) {
-            list.style.display = "block";
-          }
-        });
+        renderListItem.addEventListener("click", addToPlanByCategory);
       }
     });
   });
@@ -55,26 +50,22 @@ const renderedCategoryActivities = document.querySelectorAll(
 );
 
 // Event Listeners
-ownActivitySubmitButton.addEventListener("click", addToPlan);
+ownActivitySubmitButton.addEventListener("click", addToPlanByOwnActivity);
 ownActivityInput.addEventListener("keyup", (e) => {
-  if (e.key === "Enter") addToPlan();
+  if (e.key === "Enter") addToPlanByOwnActivity();
 });
 personalisedPlan.addEventListener("click", deleteEntry);
 nameInput.addEventListener("keyup", (e) => {
   if (e.key === "Enter") updateName();
 });
 nameInputSubmitButton.addEventListener("click", updateName);
-// renderedCategories.addEventListener("click", async () => {
-//   const categoryActivities = await supabase;
-//   console.log(categoryActivities);
-// });
 
 // Callback functions
 function clearInput(input) {
   input.value = " ";
 }
 
-function addToPlan() {
+function addToPlanByOwnActivity() {
   const newActivityDiv = document.createElement("div");
   newActivityDiv.classList.add("new-activity");
   const removeButton = document.createElement("button");
@@ -87,6 +78,19 @@ function addToPlan() {
   personalisedPlan.appendChild(newActivityDiv);
 
   clearInput(ownActivityInput);
+}
+
+function addToPlanByCategory(e) {
+  const newActivityDiv = document.createElement("div");
+  newActivityDiv.classList.add("new-activity");
+  const removeButton = document.createElement("button");
+  removeButton.classList.add("remove-button");
+  removeButton.innerText = "x";
+  newActivityDiv.appendChild(removeButton);
+  const newActivity = document.createElement("li");
+  newActivity.innerText = e.target.innerHTML;
+  newActivityDiv.appendChild(newActivity);
+  personalisedPlan.appendChild(newActivityDiv);
 }
 
 function removeActivity() {

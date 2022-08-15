@@ -5,7 +5,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  list-style: none;
 }
 
 body {
@@ -190,10 +189,14 @@ nav {
   color: pink;
   font-size: 0.85rem;
   background: #a7c7df;
-  padding: 0.4vh;
+  padding: 0.4vh 1vh;
   margin: 0.4vh 0.8vh;
   color: #35432f;
   border-radius: 2px;
+}
+
+.hide {
+  display: none;
 }
 
 #search-by-category,
@@ -276,4 +279,8 @@ main div li {
   border: none;
   color: #35432f;
   cursor: pointer;
+}
+
+.new-activity {
+  list-style: none;
 }
