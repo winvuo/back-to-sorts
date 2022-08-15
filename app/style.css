@@ -13,10 +13,22 @@ body {
   color: #35432f;
 }
 
+html {
+  scroll-behavior: smooth;
+  overflow: scroll;
+  scroll-snap-type: y mandatory;
+}
+
 /* header */
+
+header {
+  scroll-snap-align: end;
+}
+
 .header-container {
   height: 100vh;
   background: #f7cb7a;
+  scroll-snap-align: end;
 }
 
 .header-container h1 {
@@ -32,6 +44,7 @@ body {
 .intro {
   height: 75vh;
   background: #f7cb7a;
+  scroll-snap-align: end;
 }
 
 .intro-description {
@@ -65,7 +78,6 @@ body {
 .intro-form {
   height: 80vh;
   background: #f7cb7a;
-  scroll-snap-align: end;
 }
 
 .intro-form-text {
@@ -133,9 +145,10 @@ body {
 }
 
 /* 2 column layout for main page */
-section {
+.main-content {
   height: 100vh;
   display: flex;
+  scroll-snap-align: end;
 }
 
 nav {
@@ -166,10 +179,21 @@ nav {
   font-size: 0.9rem;
   color: #f2f1ed;
   padding: 0.2rem 0;
+  cursor: pointer;
 }
 
 .rendered-category-text:hover {
   color: #a7c7df;
+}
+
+.rendered-category-activity-text {
+  color: pink;
+  font-size: 0.85rem;
+  background: #a7c7df;
+  padding: 0.4vh;
+  margin: 0.4vh 0.8vh;
+  color: #35432f;
+  border-radius: 2px;
 }
 
 #search-by-category,

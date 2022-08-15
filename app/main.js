@@ -10,7 +10,6 @@ const categoryContainer = document.querySelector(".search-by-category");
 
 async function loadCategories() {
   let { data: categories } = await supabase.from("categories").select("*");
-
   let { data: activities } = await supabase.from("activities").select("*");
 
   categories.forEach((data) => {
@@ -20,11 +19,20 @@ async function loadCategories() {
     categoryContainer.appendChild(renderCategory);
     let dataID = data.id;
 
-    let filteredActivities = activities.forEach((data) => {
+    activities.forEach((data) => {
       if (data.category === dataID) {
         let renderListItem = document.createElement("li");
+        renderListItem.classList = "rendered-category-activity-text";
         renderListItem.innerHTML = data.activity;
         renderCategory.appendChild(renderListItem);
+        renderListItem.style.display = "none";
+
+        renderCategory.addEventListener("click", () => {
+          let childList = renderCategory.children;
+          for (const list of childList) {
+            list.style.display = "block";
+          }
+        });
       }
     });
   });
@@ -39,6 +47,12 @@ const personalisedPlan = document.querySelector(".plan-container");
 const nameInput = document.querySelector("input.header-input");
 const nameHTML = document.querySelector("#user-name");
 const nameInputSubmitButton = document.querySelector("#submit-name");
+const renderedCategories = document.querySelectorAll(
+  "ul.rendered-category-text"
+);
+const renderedCategoryActivities = document.querySelectorAll(
+  ".rendered-category-activity-text "
+);
 
 // Event Listeners
 ownActivitySubmitButton.addEventListener("click", addToPlan);
@@ -50,6 +64,10 @@ nameInput.addEventListener("keyup", (e) => {
   if (e.key === "Enter") updateName();
 });
 nameInputSubmitButton.addEventListener("click", updateName);
+// renderedCategories.addEventListener("click", async () => {
+//   const categoryActivities = await supabase;
+//   console.log(categoryActivities);
+// });
 
 // Callback functions
 function clearInput(input) {
