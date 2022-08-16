@@ -166,7 +166,7 @@ h1 {
 }
 
 nav {
-  width: 20%;
+  width: 25%;
   background: #35432f;
   padding-left: 20px;
   overflow: scroll;
@@ -202,7 +202,6 @@ nav {
 }
 
 .rendered-category-activity-text {
-  color: pink;
   font-size: 0.85rem;
   background: #a7c7df;
   padding: 0.4vh 1vh;
@@ -211,12 +210,21 @@ nav {
   border-radius: 2px;
 }
 
+.rendered-keyword-search-text {
+  font-size: 0.85rem;
+  background: #a7c7df;
+  padding: 0.4vh 1vh;
+  margin: 0.4vh 0;
+  color: #35432f;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
 .hide {
   display: none;
 }
 
 #search-by-category,
-#search-by-keyword,
 #search-by-keyword,
 #add-your-own {
   padding: 2rem 0 0 0;
@@ -242,7 +250,7 @@ a {
 }
 
 main {
-  width: 80%;
+  width: 75%;
   height: 100vh;
   background: #e3d8e7;
   display: absolute;
@@ -267,6 +275,7 @@ h2.plan-title {
 }
 
 .search-by-keyword,
+.search-by-keyword-clear,
 .add-my-own {
   padding: 0.25rem;
   border: none;
@@ -274,11 +283,16 @@ h2.plan-title {
   font-family: Arial, Helvetica, sans-serif;
   border-radius: 3px;
   font-size: 0.8rem;
+  margin-bottom: 1.2vh;
 }
 
-input .search-by-keyword,
+/* input .search-by-keyword,
 input .add-my-own {
   width: 100vh;
+} */
+
+input {
+  width: 68%;
 }
 
 main div {
@@ -320,4 +334,8 @@ img {
   position: absolute;
   bottom: 0;
   right: 0;
+}
+
+.keyword-search-container {
+  margin-bottom: 2.2rem;
 }

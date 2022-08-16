@@ -45,6 +45,11 @@ const nameInputSubmitButton = document.querySelector("#submit-name");
 const keywordInput = document.querySelector("input.search-by-keyword");
 const keywordContainer = document.querySelector("#search-by-keyword");
 const textOnNameSubmit = document.querySelector(".intro-form-text-end");
+const keywordSearchContainer = document.querySelector(
+  ".keyword-search-container"
+);
+const keywordSearchButton = document.querySelector("button.search-by-keyword");
+const keywordSearchClear = document.querySelector(".search-by-keyword-clear");
 
 // Event Listeners
 ownActivitySubmitButton.addEventListener("click", addToPlanByOwnActivity);
@@ -61,8 +66,14 @@ keywordInput.addEventListener("keydown", (e) => {
     searchDatabase();
   }
 });
+keywordSearchButton.addEventListener("click", searchDatabase);
+keywordSearchClear.addEventListener("click", clearSearchResults);
 
 // Callback functions
+
+function clearSearchResults() {
+  keywordSearchContainer.innerHTML = "";
+}
 
 async function searchDatabase() {
   const { data, error } = await supabase
@@ -70,22 +81,21 @@ async function searchDatabase() {
     .select()
     .textSearch("activity", `${keywordInput.value}`);
 
-  const renderSearch = document.createElement("details");
-  renderSearch.classList = "rendered-search-heading";
-  const summary = document.createElement("summary");
-  summary.innerHTML = "results";
-  renderSearch.appendChild(summary);
-  keywordContainer.appendChild(renderSearch);
+  clearInput(keywordInput);
 
-  let renderSearchItem = document.createElement("p");
-  renderSearchItem.classList = "rendered-search-activity-text";
-  renderSearchItem.innerHTML = data;
-  renderSearch.appendChild(renderSearchItem);
-  keywordInput.value = " ";
+  data.forEach((data) => {
+    let renderSearchItem = document.createElement("li");
+    renderSearchItem.classList = "rendered-keyword-search-text";
+    renderSearchItem.innerHTML = data.activity;
+    keywordSearchContainer.appendChild(renderSearchItem);
+  });
+
+  keywordSearchContainer.addEventListener("click", addToPlanByKeywordSearch);
 }
 
 function clearInput(input) {
-  input.value = " ";
+  input.value = "";
+  input.placeholder = "type here";
 }
 
 function addToPlanByOwnActivity() {
@@ -104,6 +114,19 @@ function addToPlanByOwnActivity() {
 }
 
 function addToPlanByCategory(e) {
+  const newActivityDiv = document.createElement("div");
+  newActivityDiv.classList.add("new-activity");
+  const removeButton = document.createElement("button");
+  removeButton.classList.add("remove-button");
+  removeButton.innerText = "x";
+  newActivityDiv.appendChild(removeButton);
+  const newActivity = document.createElement("li");
+  newActivity.innerText = e.target.innerHTML;
+  newActivityDiv.appendChild(newActivity);
+  personalisedPlan.appendChild(newActivityDiv);
+}
+
+function addToPlanByKeywordSearch(e) {
   const newActivityDiv = document.createElement("div");
   newActivityDiv.classList.add("new-activity");
   const removeButton = document.createElement("button");
