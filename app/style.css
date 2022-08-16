@@ -77,7 +77,7 @@ h1 {
 
 .intro-description span {
   display: block;
-  font-size: 2rem;
+  font-size: 1.6rem;
 }
 
 .intro-description span.active {
@@ -285,11 +285,6 @@ h2.plan-title {
   font-size: 0.8rem;
   margin-bottom: 1.2vh;
 }
-
-/* input .search-by-keyword,
-input .add-my-own {
-  width: 100vh;
-} */
 
 input {
   width: 68%;

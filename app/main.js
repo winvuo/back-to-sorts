@@ -50,6 +50,8 @@ const keywordSearchContainer = document.querySelector(
 );
 const keywordSearchButton = document.querySelector("button.search-by-keyword");
 const keywordSearchClear = document.querySelector(".search-by-keyword-clear");
+const cityInput = document.querySelector("#input-city");
+const suggestionsContainer = document.querySelector(".suggestions-container");
 
 // Event Listeners
 ownActivitySubmitButton.addEventListener("click", addToPlanByOwnActivity);
@@ -68,8 +70,37 @@ keywordInput.addEventListener("keydown", (e) => {
 });
 keywordSearchButton.addEventListener("click", searchDatabase);
 keywordSearchClear.addEventListener("click", clearSearchResults);
+cityInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    fetchWeather();
+  }
+});
 
 // Callback functions
+
+async function addNewActivityToDatabase() {
+  const { data } = await supabase
+    .from("activitiesNewInputs")
+    .insert([{ newActivity: `${ownActivityInput.value}` }]);
+}
+
+function fetchWeather() {
+  const url = "http://api.openweathermap.org/geo/1.0/direct";
+  const cityName = `?q=${cityInput.value}`;
+  const apiKey = `&appid=${process.env.weather_API_key}`;
+  const weatherEndpoint = url + cityName + apiKey;
+
+  fetch(weatherEndpoint)
+    .then(function (res) {
+      return res.json();
+    })
+    .then(function (data) {
+      const latitude = data[0].lat;
+      const longitude = data[0].lon;
+
+      console.log(latitude, longitude);
+    });
+}
 
 function clearSearchResults() {
   keywordSearchContainer.innerHTML = "";
@@ -99,6 +130,7 @@ function clearInput(input) {
 }
 
 function addToPlanByOwnActivity() {
+  addNewActivityToDatabase();
   const newActivityDiv = document.createElement("div");
   newActivityDiv.classList.add("new-activity");
   const removeButton = document.createElement("button");
