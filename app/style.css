@@ -22,6 +22,15 @@ html {
 
 header {
   scroll-snap-align: end;
+  font-family: "Palm Springs GRAPHIC";
+  font-weight: normal;
+  font-style: normal;
+}
+
+h1 {
+  font-family: "Palm Springs GRAPHIC";
+  font-weight: normal;
+  font-style: normal;
 }
 
 .header-container {
@@ -41,22 +50,25 @@ header {
 
 /* intro section */
 .intro {
-  height: 75vh;
+  height: 100vh;
   background: #f7cb7a;
   scroll-snap-align: end;
+  font-family: "Palm Springs GRAPHIC";
+  font-weight: normal;
+  font-style: normal;
 }
 
 .intro-description {
   position: absolute;
   right: 5%;
-  top: 100%;
+  top: 110%;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
 }
 
 .intro-description li {
-  height: 4rem;
+  height: 3rem;
   display: flex;
   overflow: hidden;
   margin-bottom: 0.5rem;
@@ -65,7 +77,7 @@ header {
 
 .intro-description span {
   display: block;
-  font-size: 2.25rem;
+  font-size: 2rem;
 }
 
 .intro-description span.active {
@@ -75,7 +87,7 @@ header {
 
 /* intro form text */
 .intro-form {
-  height: 80vh;
+  height: 100vh;
   background: #f7cb7a;
 }
 
@@ -83,14 +95,15 @@ header {
   position: absolute;
   right: 5%;
   height: 4rem;
-  font-size: 2.25rem;
+  font-size: 1.8rem;
   display: block;
+  top: 220vh;
 }
 
 .intro-form form {
   position: absolute;
   right: 5%;
-  top: 185vh;
+  top: 230vh;
 }
 
 .intro-form li {
@@ -103,8 +116,9 @@ header {
 .intro-form-text-end {
   right: 5%;
   height: 4rem;
-  font-size: 2.25rem;
+  font-size: 2rem;
   margin-top: 80px;
+  display: none;
 }
 
 /* intro form */
@@ -127,6 +141,7 @@ header {
   font-size: 1.25rem;
   text-align: right;
   padding-bottom: 1.25rem;
+  font-family: "Tiro Tamil";
 }
 
 .header-submit-button {
@@ -152,14 +167,14 @@ header {
 
 nav {
   width: 20%;
-  height: 100vh;
   background: #35432f;
   padding-left: 20px;
+  overflow: scroll;
 }
 
 /* sidebar */
 .sidebar {
-  padding: 10vh 2vh 2vh 2vh;
+  padding: 10vh 2vh;
   margin: 0;
 }
 
@@ -174,7 +189,8 @@ nav {
   color: #f7cb7a;
 }
 
-.rendered-category-text {
+.rendered-category-text,
+.rendered-search-heading {
   font-size: 0.9rem;
   color: #f2f1ed;
   padding: 0.2rem 0;
@@ -245,6 +261,9 @@ h2.plan-title {
   text-align: left;
   margin-left: 5rem;
   color: #c54b25;
+  font-family: "Palm Springs GRAPHIC";
+  font-weight: normal;
+  font-style: normal;
 }
 
 .search-by-keyword,
@@ -283,4 +302,22 @@ main div li {
 
 .new-activity {
   list-style: none;
+}
+
+#header-image {
+  height: 45vh;
+  position: relative;
+}
+
+img {
+  height: 42vh;
+  width: 42vh;
+}
+
+#header-image a {
+  font-size: 0.8rem;
+  color: #35432f;
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }

@@ -42,12 +42,9 @@ const personalisedPlan = document.querySelector(".plan-container");
 const nameInput = document.querySelector("input.header-input");
 const nameHTML = document.querySelector("#user-name");
 const nameInputSubmitButton = document.querySelector("#submit-name");
-const renderedCategories = document.querySelectorAll(
-  "ul.rendered-category-text"
-);
-const renderedCategoryActivities = document.querySelectorAll(
-  ".rendered-category-activity-text "
-);
+const keywordInput = document.querySelector("input.search-by-keyword");
+const keywordContainer = document.querySelector("#search-by-keyword");
+const textOnNameSubmit = document.querySelector(".intro-form-text-end");
 
 // Event Listeners
 ownActivitySubmitButton.addEventListener("click", addToPlanByOwnActivity);
@@ -55,12 +52,38 @@ ownActivityInput.addEventListener("keyup", (e) => {
   if (e.key === "Enter") addToPlanByOwnActivity();
 });
 personalisedPlan.addEventListener("click", deleteEntry);
-nameInput.addEventListener("keyup", (e) => {
+nameInput.addEventListener("keydown", (e) => {
   if (e.key === "Enter") updateName();
 });
 nameInputSubmitButton.addEventListener("click", updateName);
+keywordInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    searchDatabase();
+  }
+});
 
 // Callback functions
+
+async function searchDatabase() {
+  const { data, error } = await supabase
+    .from("activities")
+    .select()
+    .textSearch("activity", `${keywordInput.value}`);
+
+  const renderSearch = document.createElement("details");
+  renderSearch.classList = "rendered-search-heading";
+  const summary = document.createElement("summary");
+  summary.innerHTML = "results";
+  renderSearch.appendChild(summary);
+  keywordContainer.appendChild(renderSearch);
+
+  let renderSearchItem = document.createElement("p");
+  renderSearchItem.classList = "rendered-search-activity-text";
+  renderSearchItem.innerHTML = data;
+  renderSearch.appendChild(renderSearchItem);
+  keywordInput.value = " ";
+}
+
 function clearInput(input) {
   input.value = " ";
 }
@@ -114,4 +137,5 @@ function updateName() {
     nameHTML.innerHTML = `${userName}'s`;
   }
   nameInputSubmitButton.innerHTML = "submitted";
+  textOnNameSubmit.style.display = "block";
 }

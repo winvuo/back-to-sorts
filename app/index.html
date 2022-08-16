@@ -7,31 +7,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Final Project</title>
     <link rel="stylesheet" href="style.css"/>
+    <link rel="preload" href="../fonts/PalmSpringsGRAPHIC.woff2" as="font" type="font/woff2" crossorigin="crossorigin">
+    <link rel="preload" href="../fonts/PalmSpringsGRAPHIC.svg" as="font" type="font/svg" crossorigin="crossorigin">
   </head>
 
   <body>
     <header>
       <div class="header-container">
-        <h1>back to sorts</h1>
+        <h1>
+          back to sorts.</h1>
       </div>
 
       <div class="intro">
         <ul class="intro-description">
           <li>
-            <span>Hi, I'm your friendly guide ◝(ᵔᵕᵔ)◜
+            <span>Hi, I'm your friendly guide 
             </span>
           </li>
           <li>
-            <span>here to suggest ideas on how to fill your day</span>
+            <span>Here to suggest ideas on how to fill your day</span>
           </li>
           <li>
             <span>with the fun stuff and little things</span>
           </li>
           <li>
-            <span>when you're feeling
-              <i>out of sorts.</i>
+            <span>when you're feeling ut f srts
             </span>
           </li>
+
+          <li id="header-image">
+            <img src="../images/IMG-7591.jpg" alt="niall-breen-comic-feel-at-ease">
+            <a href="https://www.instagram.com/niall.breen.comics/?hl=en">source: niall.breen.comics</a>
+          </li>
+
         </div>
 
         <div class="intro-form">
@@ -48,66 +56,59 @@
               <button type="button" class="header-submit-button" id="submit-city">submit</button>
             </li>
 
-            <li class="header-li-container">
-              <label class="header-questions">
-                <i>to create an account (optional)</i>, provide your email</label>
-              <input class="header-input" type="text" placeholder="enter your email"></input>
-              <button type="button" class="header-submit-button" id="submit-name">submit</button>
+            <li>
+              <span class="intro-form-text-end">YAY! Let's get Back To Srts</span>
             </li>
 
-            <li>
-              <span class="intro-form-text-end">YAY! let's make a plan together & get
-                <i>back to sorts.</i>
-              </li>
-            </form>
+          </form>
 
+        </div>
+
+      </header>
+
+      <section class="main-content">
+        <nav class="sidebar">
+
+          <div class="suggestions">
+            <label class="sidebar-subheading" id="activity-suggestions">suggested activities</label>
+            <ul class="suggestions-container"></ul>
           </div>
 
-        </header>
-
-        <section class="main-content">
-          <nav class="sidebar">
-
-            <div class="suggestions">
-              <label class="sidebar-subheading" id="activity-suggestions">suggested activities</label>
-              <ul class="suggestions-container"></ul>
-            </div>
-
-            <div id="search-by-category">
-              <label class="sidebar-subheading">add by
-                <i>category</i>
-              </label>
-              <div class="search-by-category"></div>
-            </label>
-          </div>
-
-          <div id="search-by-keyword">
+          <div id="search-by-category">
             <label class="sidebar-subheading">add by
-              <i>keyword search</i>
+              <i>category</i>
             </label>
-            <input class="search-by-keyword" placeholder="type a keyword"></input>
-            <button class="search-by-keyword">search</button>
-          </div>
+            <div class="search-by-category"></div>
+          </label>
+        </div>
 
-          <div id="add-your-own">
-            <label class="sidebar-subheading">can't find it?<br>
-              <i>add your personalised activity</i>
-            </label>
-            <input class="add-my-own" placeholder="type an activity"></input>
-            <button class="add-my-own">add</button>
-          </div>
-        </nav>
+        <div id="search-by-keyword">
+          <label class="sidebar-subheading">add by
+            <i>keyword search</i>
+          </label>
+          <input class="search-by-keyword" placeholder="type a keyword"></input>
+          <button class="search-by-keyword">search</button>
+        </div>
 
-        <main>
-          <h2 class="plan-title">
-            <span id="user-name">
-              My</span>
-            back to sorts plan ✲ﾟ*</h2>
-          <ul class="plan-container"></ul>
-        </main>
+        <div id="add-your-own">
+          <label class="sidebar-subheading">can't find it?<br>
+            <i>add your personalised activity</i>
+          </label>
+          <input class="add-my-own" placeholder="type an activity"></input>
+          <button class="add-my-own">add</button>
+        </div>
+      </nav>
 
-      </section>
-      <script src="main.js" type="module"></script>
-    </body>
+      <main>
+        <h2 class="plan-title">
+          <span id="user-name">
+            My</span>
+          Back To Srts Plan</h2>
+        <ul class="plan-container"></ul>
+      </main>
 
-  </html>
+    </section>
+    <script src="main.js" type="module"></script>
+  </body>
+
+</html>
