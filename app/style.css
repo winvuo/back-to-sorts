@@ -190,7 +190,8 @@ nav {
 }
 
 .rendered-category-text,
-.rendered-search-heading {
+.rendered-search-heading,
+.rendered-suggestions-text {
   font-size: 0.9rem;
   color: #f2f1ed;
   padding: 0.2rem 0;
@@ -333,4 +334,8 @@ img {
 
 .keyword-search-container {
   margin-bottom: 2.2rem;
+}
+
+.weather-icon {
+  height: 10px;
 }

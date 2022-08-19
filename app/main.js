@@ -51,6 +51,7 @@ const keywordSearchContainer = document.querySelector(
 const keywordSearchButton = document.querySelector("button.search-by-keyword");
 const keywordSearchClear = document.querySelector(".search-by-keyword-clear");
 const cityInput = document.querySelector("#input-city");
+const cityInputSubmitButton = document.querySelector("#submit-city");
 const suggestionsContainer = document.querySelector(".suggestions-container");
 
 // Event Listeners
@@ -72,9 +73,10 @@ keywordSearchButton.addEventListener("click", searchDatabase);
 keywordSearchClear.addEventListener("click", clearSearchResults);
 cityInput.addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
-    fetchWeather();
+    displayWeather();
   }
 });
+cityInputSubmitButton.addEventListener("click", displayWeather);
 
 // Callback functions
 
@@ -84,21 +86,66 @@ async function addNewActivityToDatabase() {
     .insert([{ newActivity: `${ownActivityInput.value}` }]);
 }
 
-function fetchWeather() {
-  const url = "http://api.openweathermap.org/geo/1.0/direct";
+function displayWeather() {
+  cityInputSubmitButton.innerHTML = "submitted";
+  const geolocationUrl = "http://api.openweathermap.org/geo/1.0/direct";
+  const weatherApiUrl = "https://api.openweathermap.org/data/2.5/weather";
   const cityName = `?q=${cityInput.value}`;
-  const apiKey = `&appid=${process.env.weather_API_key}`;
-  const weatherEndpoint = url + cityName + apiKey;
+  const geolocationApiKey = `&appid=${process.env.geolocation_API_key}`;
+  const weatherApiKey = `&appid=${process.env.weather_API_key}`;
+  const fetchGeolocation = geolocationUrl + cityName + geolocationApiKey;
 
-  fetch(weatherEndpoint)
+  fetch(fetchGeolocation)
     .then(function (res) {
       return res.json();
     })
     .then(function (data) {
       const latitude = data[0].lat;
       const longitude = data[0].lon;
+      const cityName = data[0].name;
+      fetch(
+        `${weatherApiUrl}?lat=${latitude}&lon=${longitude}&units=metric${weatherApiKey}`
+      )
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (data) {
+          const weatherDescription = data.weather[0].description;
+          const weatherIcon = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+          const weatherFeelsLike = data.main.feels_like;
 
-      console.log(latitude, longitude);
+          const renderWeather = document.createElement("details");
+          renderWeather.classList = "rendered-suggestions-text";
+          const weatherSummary = document.createElement("summary");
+          weatherSummary.innerHTML = `There is currently ${weatherDescription} and feels like ${weatherFeelsLike}°C in ${cityName}.`;
+          renderWeather.appendChild(weatherSummary);
+
+          console.log(weatherIcon);
+
+          const img = document.createElement("img");
+
+          img.classList = ".weather-icon";
+          img.src = weatherIcon;
+          console.log(img);
+          suggestionsContainer.appendChild(img);
+          suggestionsContainer.appendChild(renderWeather);
+
+          // const renderCategory = document.createElement("details");
+          //     renderCategory.classList = "rendered-category-text";
+          //     const summary = document.createElement("summary");
+          //     summary.innerHTML = `${data.category_name}`;
+          //     renderCategory.appendChild(summary);
+          //     categoryContainer.appendChild(renderCategory);
+          //     let dataID = data.id;
+          //     activities.forEach((data) => {
+          //       if (data.category === dataID) {
+          //         let renderListItem = document.createElement("p");
+          //         renderListItem.classList = "rendered-category-activity-text";
+          //         renderListItem.innerHTML = data.activity;
+          //         renderCategory.appendChild(renderListItem);
+
+          //         renderListItem.addEventListener("click", addToPlanByCategory);
+        });
     });
 }
 
