@@ -88,14 +88,14 @@ async function addNewActivityToDatabase() {
 
 function displayWeather() {
   cityInputSubmitButton.innerHTML = "submitted";
-  const geolocationUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${cityInput.value}&appid=`;
+  const geolocationUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${cityInput.value}&appid=${geolocation_API_key}/`;
   const weatherApiUrl = "https://api.openweathermap.org/data/2.5/weather";
   // const cityName = `?q=${cityInput.value}`;
-  const geolocationApiKey = process.env.geolocation_API_key;
+  // const geolocationApiKey = process.env.geolocation_API_key;
   const weatherApiKey = process.env.weather_API_key;
-  const fetchGeolocation = geolocationUrl + geolocationApiKey;
+  // const fetchGeolocation = geolocationUrl + geolocationApiKey;
 
-  fetch(fetchGeolocation)
+  fetch(geolocationUrl)
     .then(function (res) {
       return res.json();
     })
@@ -105,7 +105,7 @@ function displayWeather() {
       const longitude = data[0].lon;
       const cityName = data[0].name;
       fetch(
-        `${weatherApiUrl}?lat=${latitude}&lon=${longitude}&units=metric&appid=${weatherApiKey}`
+        `${weatherApiUrl}?lat=${latitude}&lon=${longitude}&units=metric&appid=${weatherApiKey}/`
       )
         .then(function (response) {
           return response.json();
