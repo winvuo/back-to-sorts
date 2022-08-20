@@ -130,11 +130,13 @@ function displayWeather() {
             document.createElement("summary");
 
           if (weatherDescription.includes("rain")) {
-            weatherRelatedSuggestionsSummary.innerHTML = `Why not go for a walk? Remember to bring your brolly! To add to your list, choose from below:`;
+            weatherRelatedSuggestionsSummary.innerHTML = `Why not go for a walk? Remember to bring your brolly! Click here to see some 'walk' related suggestions.`;
           } else if (weatherFeelsLike <= 15) {
-            weatherRelatedSuggestionsSummary.innerHTML = `Why not go for a walk? Remember to rug up! To add to your list, choose from below:`;
+            weatherRelatedSuggestionsSummary.innerHTML = `Why not go for a walk? Remember to rug up! Click here to see some 'walk' related suggestions.`;
+          } else if (weatherFeelsLike >= 25) {
+            weatherRelatedSuggestionsSummary.innerHTML = `Why not go for a walk? Remember to stay hydrated! Click here to see some 'walk' related suggestions.`;
           } else {
-            weatherRelatedSuggestionsSummary.innerHTML = `Why not go for a walk? “In every walk with nature, one receives far more than he seeks.” -John Muir. To add to your list, choose from below:`;
+            weatherRelatedSuggestionsSummary.innerHTML = `Why not go for a walk? Click here to see some 'walk' related suggestions.`;
           }
 
           weatherRelatedSuggestions.appendChild(
