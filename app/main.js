@@ -44,7 +44,7 @@ const nameHTML = document.querySelector("#user-name");
 const nameInputSubmitButton = document.querySelector("#submit-name");
 const keywordInput = document.querySelector("input.search-by-keyword");
 const keywordContainer = document.querySelector("#search-by-keyword");
-const textOnNameSubmit = document.querySelector(".intro-form-text-end");
+const textOnFormSubmit = document.querySelector(".intro-form-text-end");
 const keywordSearchContainer = document.querySelector(
   ".keyword-search-container"
 );
@@ -100,6 +100,7 @@ function displayWeather() {
       return res.json();
     })
     .then(function (data) {
+      textOnFormSubmit.style.display = "block";
       const latitude = data[0].lat;
       const longitude = data[0].lon;
       const cityName = data[0].name;
@@ -110,41 +111,56 @@ function displayWeather() {
           return response.json();
         })
         .then(function (data) {
-          const weatherDescription = data.weather[0].description;
           const weatherIcon = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
-          const weatherFeelsLike = data.main.feels_like;
-
-          const renderWeather = document.createElement("details");
-          renderWeather.classList = "rendered-suggestions-text";
-          const weatherSummary = document.createElement("summary");
-          weatherSummary.innerHTML = `There is currently ${weatherDescription} and feels like ${weatherFeelsLike}°C in ${cityName}.`;
-          renderWeather.appendChild(weatherSummary);
-
-          console.log(weatherIcon);
-
           const img = document.createElement("img");
-
-          img.classList = ".weather-icon";
+          img.classList = "weather-icon";
           img.src = weatherIcon;
-          console.log(img);
+
+          const weatherDescription = data.weather[0].description;
+          const weatherFeelsLike = data.main.feels_like;
+          const renderWeather = document.createElement("p");
+          renderWeather.classList = "rendered-suggestions-weather";
+          // const weatherSummary = document.createElement("summary");
+          renderWeather.innerHTML = `Currently, the weather is ${weatherDescription} and feels like ${weatherFeelsLike}°C in ${cityName}.`;
+          // renderWeather.appendChild(weatherSummary);
+
+          const weatherRelatedSuggestions = document.createElement("details");
+          weatherRelatedSuggestions.classList = "rendered-suggestions-text";
+          const weatherRelatedSuggestionsSummary =
+            document.createElement("summary");
+
+          if (weatherDescription.includes("rain")) {
+            weatherRelatedSuggestionsSummary.innerHTML = `Why not go for a walk? Remember to bring your brolly! To add to your list, choose from below:`;
+          } else if (weatherFeelsLike <= 15) {
+            weatherRelatedSuggestionsSummary.innerHTML = `Why not go for a walk? Remember to rug up! To add to your list, choose from below:`;
+          } else {
+            weatherRelatedSuggestionsSummary.innerHTML = `Why not go for a walk? “In every walk with nature, one receives far more than he seeks.” -John Muir. To add to your list, choose from below:`;
+          }
+
+          weatherRelatedSuggestions.appendChild(
+            weatherRelatedSuggestionsSummary
+          );
+
+          async function searchDatabaseForWalk() {
+            const { data, error } = await supabase
+              .from("activities")
+              .select()
+              .textSearch("activity", "walk");
+
+            data.forEach((data) => {
+              let renderSearchItem = document.createElement("p");
+              renderSearchItem.classList = "rendered-walk-search-text";
+              renderSearchItem.innerHTML = data.activity;
+              weatherRelatedSuggestions.appendChild(renderSearchItem);
+
+              renderSearchItem.addEventListener("click", addToPlanByCategory);
+            });
+          }
+          searchDatabaseForWalk();
+
           suggestionsContainer.appendChild(img);
           suggestionsContainer.appendChild(renderWeather);
-
-          // const renderCategory = document.createElement("details");
-          //     renderCategory.classList = "rendered-category-text";
-          //     const summary = document.createElement("summary");
-          //     summary.innerHTML = `${data.category_name}`;
-          //     renderCategory.appendChild(summary);
-          //     categoryContainer.appendChild(renderCategory);
-          //     let dataID = data.id;
-          //     activities.forEach((data) => {
-          //       if (data.category === dataID) {
-          //         let renderListItem = document.createElement("p");
-          //         renderListItem.classList = "rendered-category-activity-text";
-          //         renderListItem.innerHTML = data.activity;
-          //         renderCategory.appendChild(renderListItem);
-
-          //         renderListItem.addEventListener("click", addToPlanByCategory);
+          suggestionsContainer.appendChild(weatherRelatedSuggestions);
         });
     });
 }
@@ -239,5 +255,4 @@ function updateName() {
     nameHTML.innerHTML = `${userName}'s`;
   }
   nameInputSubmitButton.innerHTML = "submitted";
-  textOnNameSubmit.style.display = "block";
 }

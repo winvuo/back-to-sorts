@@ -191,18 +191,27 @@ nav {
 
 .rendered-category-text,
 .rendered-search-heading,
-.rendered-suggestions-text {
+.rendered-suggestions-text,
+.rendered-walk-search-text {
   font-size: 0.9rem;
   color: #f2f1ed;
   padding: 0.2rem 0;
   cursor: pointer;
 }
 
-.rendered-category-text:hover {
+.rendered-suggestions-weather {
+  font-size: 0.9rem;
+  color: #f2f1ed;
+  padding: 0.2rem 0;
+}
+
+.rendered-category-text:hover,
+.rendered-suggestions-text:hover {
   color: #a7c7df;
 }
 
-.rendered-category-activity-text {
+.rendered-category-activity-text,
+.rendered-walk-search-text {
   font-size: 0.85rem;
   background: #a7c7df;
   padding: 0.4vh 1vh;
@@ -219,6 +228,7 @@ nav {
   color: #35432f;
   border-radius: 2px;
   cursor: pointer;
+  list-style: none;
 }
 
 .hide {
@@ -306,8 +316,12 @@ main div li {
   padding: 0.25rem;
   margin-right: 0.5rem;
   border: none;
-  color: #35432f;
+  color: #f2f1ed;
   cursor: pointer;
+}
+
+.remove-button:hover {
+  color: #35432f;
 }
 
 .new-activity {
@@ -337,5 +351,7 @@ img {
 }
 
 .weather-icon {
-  height: 10px;
+  display: relative;
+  height: 12vh;
+  width: 12vh;
 }
