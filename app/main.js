@@ -87,12 +87,13 @@ async function addNewActivityToDatabase() {
 }
 
 function displayWeather() {
-  cityInputSubmitButton.innerHTML = "submitted";
-  const geolocationUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${cityInput.value}&appid=${geolocation_API_key}/`;
-  const weatherApiUrl = "https://api.openweathermap.org/data/2.5/weather";
-  // const cityName = `?q=${cityInput.value}`;
-  // const geolocationApiKey = process.env.geolocation_API_key;
+  const geolocationApiKey = process.env.geolocation_API_key;
   const weatherApiKey = process.env.weather_API_key;
+  cityInputSubmitButton.innerHTML = "submitted";
+  const geolocationUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${cityInput.value}&appid=${geolocationApiKey}`;
+  const weatherApiUrl = "https://api.openweathermap.org/data/2.5/onecall";
+  // const cityName = `?q=${cityInput.value}`;
+
   // const fetchGeolocation = geolocationUrl + geolocationApiKey;
 
   fetch(geolocationUrl)
@@ -105,24 +106,22 @@ function displayWeather() {
       const longitude = data[0].lon;
       const cityName = data[0].name;
       fetch(
-        `${weatherApiUrl}?lat=${latitude}&lon=${longitude}&units=metric&appid=${weatherApiKey}/`
+        `${weatherApiUrl}?lat=${latitude}&lon=${longitude}&units=metric&appid=${weatherApiKey}`
       )
         .then(function (response) {
           return response.json();
         })
         .then(function (data) {
-          const weatherIcon = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+          const weatherIcon = `http://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png`;
           const img = document.createElement("img");
           img.classList = "weather-icon";
           img.src = weatherIcon;
 
-          const weatherDescription = data.weather[0].description;
-          const weatherFeelsLike = data.main.feels_like;
+          const weatherDescription = data.current.weather[0].description;
+          const weatherFeelsLike = data.current.feels_like;
           const renderWeather = document.createElement("p");
           renderWeather.classList = "rendered-suggestions-weather";
-          // const weatherSummary = document.createElement("summary");
           renderWeather.innerHTML = `Currently, the weather is ${weatherDescription} and feels like ${weatherFeelsLike}°C in ${cityName}.`;
-          // renderWeather.appendChild(weatherSummary);
 
           const weatherRelatedSuggestions = document.createElement("details");
           weatherRelatedSuggestions.classList = "rendered-suggestions-text";

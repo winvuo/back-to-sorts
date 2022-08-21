@@ -1,5 +1,12 @@
 /* Google Fonts Import Link */
 @import url("https://fonts.googleapis.com/css2?family=Tiro+Tamil:ital@0;1&display=swap");
+@font-face {
+  font-family: "Palm Springs GRAPHIC";
+  src: url(../fonts/PalmSpringsGRAPHIC.woff2);
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 
 * {
   margin: 0;
