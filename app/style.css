@@ -206,7 +206,8 @@ nav {
   cursor: pointer;
 }
 
-.rendered-suggestions-weather {
+.rendered-suggestions-weather,
+.start-here-text {
   font-size: 0.9rem;
   color: #f2f1ed;
   padding: 0.2rem 0;
@@ -244,8 +245,10 @@ nav {
 
 #search-by-category,
 #search-by-keyword,
-#add-your-own {
+#add-your-own,
+#activity-suggestions {
   padding: 2rem 0 0 0;
+  display: block;
 }
 
 .search-by-category li {
@@ -361,4 +364,33 @@ img {
   display: relative;
   height: 12vh;
   width: 12vh;
+}
+
+#community-list-winnie,
+#community-list-brendan {
+  width: 13vh;
+  height: auto;
+  padding-right: 1vh;
+}
+
+#modal-winnie,
+#modal-brendan {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 75vh;
+  height: auto;
+  display: none;
+}
+
+#overlay {
+  position: fixed;
+  opacity: 100;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #e3d8e7;
+  display: none;
 }

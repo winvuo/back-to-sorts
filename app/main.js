@@ -53,6 +53,8 @@ const keywordSearchClear = document.querySelector(".search-by-keyword-clear");
 const cityInput = document.querySelector("#input-city");
 const cityInputSubmitButton = document.querySelector("#submit-city");
 const suggestionsContainer = document.querySelector(".suggestions-container");
+const communityWinnie = document.querySelector("#community-list-winnie");
+const communityBrendan = document.querySelector("#community-list-brendan");
 
 // Event Listeners
 ownActivitySubmitButton.addEventListener("click", addToPlanByOwnActivity);
@@ -77,6 +79,37 @@ cityInput.addEventListener("keydown", (e) => {
   }
 });
 cityInputSubmitButton.addEventListener("click", displayWeather);
+communityWinnie.addEventListener("click", function () {
+  console.log("clicked");
+  const modal = document.querySelector("#modal-winnie");
+  const overlay = document.querySelector("#overlay");
+  modal.style.display = "block";
+  modal.style.zIndex = 10;
+  overlay.style.opacity = 100;
+  overlay.style.zIndex = 9;
+  overlay.style.display = "block";
+
+  overlay.addEventListener("click", function () {
+    overlay.style.display = "none";
+    modal.style.display = "none";
+  });
+});
+
+communityBrendan.addEventListener("click", function () {
+  console.log("clicked");
+  const modal = document.querySelector("#modal-brendan");
+  const overlay = document.querySelector("#overlay");
+  modal.style.display = "block";
+  modal.style.zIndex = 10;
+  overlay.style.opacity = 100;
+  overlay.style.zIndex = 9;
+  overlay.style.display = "block";
+
+  overlay.addEventListener("click", function () {
+    overlay.style.display = "none";
+    modal.style.display = "none";
+  });
+});
 
 // Callback functions
 
@@ -118,7 +151,7 @@ function displayWeather() {
           img.src = weatherIcon;
 
           const weatherDescription = data.current.weather[0].description;
-          const weatherFeelsLike = data.current.feels_like;
+          const weatherFeelsLike = Math.round(data.current.feels_like);
           const renderWeather = document.createElement("p");
           renderWeather.classList = "rendered-suggestions-weather";
           renderWeather.innerHTML = `Currently, the weather is ${weatherDescription} and feels like ${weatherFeelsLike}°C in ${cityName}.`;
