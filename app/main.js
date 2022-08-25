@@ -6,7 +6,9 @@ const supabaseUrl = "https://srfxftfqnjzhjapmpmlb.supabase.co";
 const supabaseKey = process.env.SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-const categoryContainer = document.querySelector(".search-by-category");
+const categoryContainer = document.querySelector(
+  ".search-by-category-container"
+);
 
 async function loadCategories() {
   let { data: categories } = await supabase.from("categories").select("*");
@@ -44,7 +46,7 @@ const nameHTML = document.querySelector("#user-name");
 const nameInputSubmitButton = document.querySelector("#submit-name");
 const keywordInput = document.querySelector("input.search-by-keyword");
 const keywordContainer = document.querySelector("#search-by-keyword");
-const textOnFormSubmit = document.querySelector(".intro-form-text-end");
+const textOnFormSubmit = document.querySelector(".intro-form-description-end");
 const keywordSearchContainer = document.querySelector(
   ".keyword-search-container"
 );

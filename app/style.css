@@ -1,4 +1,4 @@
-/* Google Fonts Import Link */
+/* Font import */
 @import url("https://fonts.googleapis.com/css2?family=Tiro+Tamil:ital@0;1&display=swap");
 @font-face {
   font-family: "Palm Springs GRAPHIC";
@@ -25,7 +25,7 @@ html {
   scroll-snap-type: y mandatory;
 }
 
-/* header */
+/* header: scroll page 1 (h1) */
 
 header {
   scroll-snap-align: end;
@@ -55,7 +55,7 @@ h1 {
   text-align: center;
 }
 
-/* intro section */
+/* header: scroll page 2 (intro) */
 .intro {
   height: 100vh;
   background: #f7cb7a;
@@ -92,13 +92,35 @@ h1 {
   transition: 1s ease-out;
 }
 
-/* intro form text */
+#header-image-container {
+  height: 45vh;
+  position: relative;
+}
+
+#header-image-container a {
+  font-size: 0.8rem;
+  color: #35432f;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+img {
+  height: 42vh;
+  width: 42vh;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* header: scroll page 3 (intro form) */
 .intro-form {
   height: 100vh;
   background: #f7cb7a;
 }
 
-.intro-form-text {
+.intro-form-description {
   position: absolute;
   right: 5%;
   height: 4rem;
@@ -120,7 +142,7 @@ h1 {
   justify-content: flex-end;
 }
 
-.intro-form-text-end {
+.intro-form-description-end {
   right: 5%;
   height: 4rem;
   font-size: 2rem;
@@ -128,7 +150,6 @@ h1 {
   display: none;
 }
 
-/* intro form */
 .header-input {
   border: none;
   background: #e3d8e7;
@@ -165,8 +186,8 @@ h1 {
   color: #35432f;
 }
 
-/* 2 column layout for main page */
-.main-content {
+/* 2 column layout for main app */
+.app {
   height: 100vh;
   display: flex;
   scroll-snap-align: end;
@@ -179,19 +200,13 @@ nav {
   overflow: scroll;
 }
 
-/* sidebar */
-.sidebar {
+/* navigation bar */
+.navbar {
   padding: 10vh 2vh;
   margin: 0;
 }
 
-.sidebar-heading {
-  font-size: 2rem;
-  color: #e3d8e7;
-  padding-bottom: 2vh;
-}
-
-.sidebar-subheading {
+.navbar-heading {
   font-size: 1rem;
   color: #f7cb7a;
 }
@@ -251,11 +266,11 @@ nav {
   display: block;
 }
 
-.search-by-category li {
+.search-by-category-container li {
   position: relative;
 }
 
-.search-by-category li a {
+.search-by-category-container li a {
   display: relative;
   align-items: center;
   justify-content: space-between;
@@ -264,35 +279,6 @@ nav {
 
 .category-name {
   color: #f2f1ed;
-}
-
-a {
-  text-decoration: none;
-}
-
-main {
-  width: 75%;
-  height: 100vh;
-  background: #e3d8e7;
-  display: absolute;
-  justify-content: center;
-  align-items: center;
-}
-
-h2 {
-  font-size: 2rem;
-  color: #35432f;
-  font-style: italic;
-  padding-top: 5vh;
-}
-
-h2.plan-title {
-  text-align: left;
-  margin-left: 5rem;
-  color: #c54b25;
-  font-family: "Palm Springs GRAPHIC";
-  font-weight: normal;
-  font-style: normal;
 }
 
 .search-by-keyword,
@@ -311,52 +297,7 @@ input {
   width: 68%;
 }
 
-main div {
-  display: flex;
-  align-items: center;
-  margin: 1rem 5rem;
-}
-
-main div li {
-  text-align: left;
-  padding-top: 0.25rem;
-}
-
-.remove-button {
-  padding: 0.25rem;
-  margin-right: 0.5rem;
-  border: none;
-  color: #f2f1ed;
-  cursor: pointer;
-}
-
-.remove-button:hover {
-  color: #35432f;
-}
-
-.new-activity {
-  list-style: none;
-}
-
-#header-image {
-  height: 45vh;
-  position: relative;
-}
-
-img {
-  height: 42vh;
-  width: 42vh;
-}
-
-#header-image a {
-  font-size: 0.8rem;
-  color: #35432f;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-}
-
-.keyword-search-container {
+.search-by-keyword-container {
   margin-bottom: 2.2rem;
 }
 
@@ -366,6 +307,7 @@ img {
   width: 12vh;
 }
 
+/* navigation bar: Back To Sorts community lists */
 #community-list-winnie,
 #community-list-brendan {
   width: 13vh;
@@ -393,4 +335,51 @@ img {
   bottom: 0;
   background-color: #e3d8e7;
   display: none;
+}
+
+/* back to sorts list content */
+main {
+  width: 75%;
+  height: 100vh;
+  background: #e3d8e7;
+  display: absolute;
+  justify-content: center;
+  align-items: center;
+}
+
+h2.list-title {
+  text-align: left;
+  margin-left: 5rem;
+  color: #c54b25;
+  font-family: "Palm Springs GRAPHIC";
+  padding-top: 5vh;
+  font-size: 2rem;
+  font-weight: normal;
+}
+
+main div {
+  display: flex;
+  align-items: center;
+  margin: 1rem 5rem;
+}
+
+main div li {
+  text-align: left;
+  padding-top: 0.25rem;
+}
+
+.new-activity {
+  list-style: none;
+}
+
+.remove-button {
+  padding: 0.25rem;
+  margin-right: 0.5rem;
+  border: none;
+  color: #f2f1ed;
+  cursor: pointer;
+}
+
+.remove-button:hover {
+  color: #35432f;
 }

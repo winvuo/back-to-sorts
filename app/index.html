@@ -10,17 +10,17 @@
   </head>
 
   <body>
+    <!-- header scroll page 1 (h1) -->
     <header>
       <div class="header-container">
-        <h1>
-          back to sorts.</h1>
+        <h1>back to sorts.</h1>
       </div>
 
+      <!-- header scroll page 2 (intro) -->
       <div class="intro">
         <ul class="intro-description">
           <li>
-            <span>Hi, I'm your friendly guide 
-            </span>
+            <span>Hi, I'm your friendly guide </span>
           </li>
           <li>
             <span>here with suggestions to help fill your day</span>
@@ -29,105 +29,108 @@
             <span>with the fun little things you need</span>
           </li>
           <li>
-            <span>when you're feeling ut f srts
-            </span>
+            <span>when you're feeling ut f srts</span>
           </li>
-
-          <li id="header-image">
+          <li id="header-image-container">
             <img src="../images/IMG-7591.jpg" alt="niall-breen-comic-feel-at-ease" id="header-comic">
             <a href="https://www.instagram.com/niall.breen.comics/?hl=en">source: @niall.breen.comics</a>
           </li>
-
         </div>
 
+        <!-- header scroll page 3 (intro form) -->
         <div class="intro-form">
-          <span class="intro-form-text">To get personalised suggestions, provide</span>
+          <span class="intro-form-description">To get personalised suggestions, provide</span>
           <form>
-            <li class="header-li-container">
+            <li class="header-question-container">
               <label class="header-questions">your first name</label>
               <input class="header-input" type="text" placeholder="enter your first name"></input>
               <button type="button" class="header-submit-button" id="submit-name">submit</button>
             </li>
-            <li class="header-li-container">
+            <li class="header-question-container">
               <label class="header-questions">the city you're located</label>
               <input class="header-input" id="input-city" type="text" placeholder="enter your city"></input>
               <button type="button" class="header-submit-button" id="submit-city">submit</button>
             </li>
-
             <li>
-              <span class="intro-form-text-end">Now let's get Back To Srts!</span>
+              <span class="intro-form-description-end">Now let's get Back To Srts!</span>
             </li>
-
           </form>
-
         </div>
 
       </header>
 
-      <section class="main-content">
-        <nav class="sidebar">
+      <!-- main app -->
+      <section class="app">
 
+        <!-- navigation bar -->
+        <nav class="navbar">
+
+          <!-- heading: you can start here -->
           <div class="community">
-            <label class="sidebar-subheading">you can start here</label>
+            <label class="navbar-heading">you can start here</label>
             <div class="community-container">
               <p class="start-here-text">Click below to see lists shared by our Back To Sorts community. We hope that it provides ideas, support, and a starting point to build your personal Back To Sorts list.
               </p>
               <div>
                 <img src="../images/winnie-list.png" alt="winnies-back-to-sorts-list" id="community-list-winnie">
                 <img src="../images/brendan-list.png" alt="brendans-back-to-sorts-list" id="community-list-brendan">
-
               </div>
               <div>
                 <img src="../images/winnie-list.png" alt="winnies-back-to-sorts-list" id="modal-winnie">
                 <img src="../images/brendan-list.png" alt="brendans-back-to-sorts-list" id="modal-brendan">
               </div>
               <div id="overlay"></div>
-
             </div>
           </div>
 
+          <!-- heading: suggested activities -->
           <div class="suggestions">
-            <label class="sidebar-subheading" id="activity-suggestions">suggested activities</label>
+            <label class="navbar-heading" id="activity-suggestions">suggested activities</label>
             <div class="suggestions-container"></div>
           </div>
 
+          <!-- heading: add by category -->
           <div id="search-by-category">
-            <label class="sidebar-subheading">add by
+            <label class="navbar-heading">add by
               <i>category</i>
             </label>
-            <div class="search-by-category"></div>
-          </label>
-        </div>
+            <div class="search-by-category-container"></div>
+          </div>
 
-        <div id="search-by-keyword">
-          <label class="sidebar-subheading">add by
-            <i>keyword search</i>
-          </label>
-          <input class="search-by-keyword" placeholder="type a keyword"></input>
-          <button class="search-by-keyword">search</button>
-          <button class="search-by-keyword-clear">clear</button>
-          <div class="keyword-search-container"></div>
-        </div>
+          <!-- heading: add by keyword search -->
+          <div id="search-by-keyword">
+            <label class="navbar-heading">add by
+              <i>keyword search</i>
+            </label>
+            <input class="search-by-keyword" placeholder="type a keyword"></input>
+            <button class="search-by-keyword">search</button>
+            <button class="search-by-keyword-clear">clear</button>
+            <div class="search-by-keyword-container"></div>
+          </div>
 
-        <div id=" add-your-own">
-          <label class="sidebar-subheading">can't find it?<br>
-            <i>add your personalised activity</i>
-          </label>
-          <input class="add-my-own" placeholder="type an activity"></input>
-          <button class="add-my-own">add</button>
-        </div>
-      </nav>
+          <!-- heading: can't find it? add your personalised activity -->
+          <div id=" add-your-own">
+            <label class="navbar-heading">can't find it?<br>
+              <i>add your personalised activity</i>
+            </label>
+            <input class="add-my-own" placeholder="type an activity"></input>
+            <button class="add-my-own">add</button>
+          </div>
+        </nav>
 
-      <main>
-        <h2 class="plan-title">
-          <span id="user-name">
-            My</span>
-          Back To Srts List</h2>
-        <ul class="plan-container"></ul>
-      </main>
+        <!-- back to sorts list content -->
+        <main>
+          <h2 class="list-title">
+            <span id="user-name">
+              My</span>
+            Back To Srts List</h2>
+          <ul class="plan-container"></ul>
+        </main>
 
-    </section>
-    <script src="main.js" type="module"></script>
-  </body>
+      </section>
 
-</html>
+      <script src="main.js" type="module"></script>
+
+    </body>
+
+  </html>
