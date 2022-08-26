@@ -1,11 +1,10 @@
 import { createClient } from "@supabase/supabase-js";
 import "dotenv/config";
 
-// fetch database from Supabase API
+// fetch databases from Supabase API and render on webpage load
 const supabaseUrl = "https://srfxftfqnjzhjapmpmlb.supabase.co";
 const supabaseKey = process.env.SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
-
 const categoryContainer = document.querySelector(
   ".search-by-category-container"
 );
@@ -21,7 +20,9 @@ async function loadCategories() {
     summary.innerHTML = `${data.category_name}`;
     renderCategory.appendChild(summary);
     categoryContainer.appendChild(renderCategory);
+
     let dataID = data.id;
+
     activities.forEach((data) => {
       if (data.category === dataID) {
         let renderListItem = document.createElement("p");
@@ -37,37 +38,57 @@ async function loadCategories() {
 
 loadCategories();
 
-// Query Selectors
-const ownActivityInput = document.querySelector("input.add-my-own");
-const ownActivitySubmitButton = document.querySelector("button.add-my-own");
-const personalisedPlan = document.querySelector(".plan-container");
-const nameInput = document.querySelector("input.header-input");
-const nameHTML = document.querySelector("#user-name");
+// ----------> QUERY SELECTORS <----------
+
+// QS: intro form
+const nameInput = document.querySelector("#input-name");
+const userName = document.querySelector("#user-name");
 const nameInputSubmitButton = document.querySelector("#submit-name");
-const keywordInput = document.querySelector("input.search-by-keyword");
-const keywordContainer = document.querySelector("#search-by-keyword");
+const cityInput = document.querySelector("#input-city");
+const cityInputSubmitButton = document.querySelector("#submit-city");
 const textOnFormSubmit = document.querySelector(".intro-form-description-end");
+
+// QS: community lists
+const communityWinnie = document.querySelector("#winnie");
+const communityBrendan = document.querySelector("#brendan");
+
+// QS: suggested activities
+const suggestionsContainer = document.querySelector(".suggestions-container");
+
+// QS: add by keyword
+const keywordInput = document.querySelector("input.search-by-keyword");
 const keywordSearchContainer = document.querySelector(
   ".keyword-search-container"
 );
 const keywordSearchButton = document.querySelector("button.search-by-keyword");
 const keywordSearchClear = document.querySelector(".search-by-keyword-clear");
-const cityInput = document.querySelector("#input-city");
-const cityInputSubmitButton = document.querySelector("#submit-city");
-const suggestionsContainer = document.querySelector(".suggestions-container");
-const communityWinnie = document.querySelector("#community-list-winnie");
-const communityBrendan = document.querySelector("#community-list-brendan");
 
-// Event Listeners
-ownActivitySubmitButton.addEventListener("click", addToPlanByOwnActivity);
-ownActivityInput.addEventListener("keyup", (e) => {
-  if (e.key === "Enter") addToPlanByOwnActivity();
-});
-personalisedPlan.addEventListener("click", deleteEntry);
+// QS: add own activity
+const ownActivityInput = document.querySelector("input.add-my-own");
+const ownActivitySubmitButton = document.querySelector("button.add-my-own");
+
+// QS: Back To Sorts list content
+const personalisedList = document.querySelector(".list-container");
+
+// ----------> EVENT LISTENERS <----------
+
+// EL: intro form
 nameInput.addEventListener("keydown", (e) => {
   if (e.key === "Enter") updateName();
 });
 nameInputSubmitButton.addEventListener("click", updateName);
+cityInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    displayWeather();
+  }
+});
+cityInputSubmitButton.addEventListener("click", displayWeather);
+
+// EL: community lists
+communityWinnie.addEventListener("click", displayCommunityModal);
+communityBrendan.addEventListener("click", displayCommunityModal);
+
+// EL: add by keyword
 keywordInput.addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
     searchDatabase();
@@ -75,61 +96,46 @@ keywordInput.addEventListener("keydown", (e) => {
 });
 keywordSearchButton.addEventListener("click", searchDatabase);
 keywordSearchClear.addEventListener("click", clearSearchResults);
-cityInput.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
-    displayWeather();
-  }
-});
-cityInputSubmitButton.addEventListener("click", displayWeather);
-communityWinnie.addEventListener("click", function () {
-  console.log("clicked");
-  const modal = document.querySelector("#modal-winnie");
-  const overlay = document.querySelector("#overlay");
-  modal.style.display = "block";
-  modal.style.zIndex = 10;
-  overlay.style.opacity = 100;
-  overlay.style.zIndex = 9;
-  overlay.style.display = "block";
 
-  overlay.addEventListener("click", function () {
-    overlay.style.display = "none";
-    modal.style.display = "none";
-  });
+// EL: add own activity
+ownActivitySubmitButton.addEventListener("click", addToPlanByOwnActivity);
+ownActivityInput.addEventListener("keyup", (e) => {
+  if (e.key === "Enter") addToPlanByOwnActivity();
 });
 
-communityBrendan.addEventListener("click", function () {
-  console.log("clicked");
-  const modal = document.querySelector("#modal-brendan");
-  const overlay = document.querySelector("#overlay");
-  modal.style.display = "block";
-  modal.style.zIndex = 10;
-  overlay.style.opacity = 100;
-  overlay.style.zIndex = 9;
-  overlay.style.display = "block";
+// EL: Back To Sorts list content
+personalisedList.addEventListener("click", deleteEntry);
 
-  overlay.addEventListener("click", function () {
-    overlay.style.display = "none";
-    modal.style.display = "none";
-  });
-});
+// ----------> FUNCTIONS <----------
 
-// Callback functions
-
-async function addNewActivityToDatabase() {
-  const { data } = await supabase
-    .from("activitiesNewInputs")
-    .insert([{ newActivity: `${ownActivityInput.value}` }]);
+function clearInput(input) {
+  input.value = "";
+  input.placeholder = "type here";
 }
 
+// F: community lists
+function displayCommunityModal(e) {
+  const modal = document.querySelector(`#modal-${e.target.id}`);
+  const overlay = document.querySelector("#overlay");
+  modal.style.display = "block";
+  modal.style.zIndex = 10;
+  overlay.style.opacity = 100;
+  overlay.style.zIndex = 9;
+  overlay.style.display = "block";
+
+  overlay.addEventListener("click", function () {
+    overlay.style.display = "none";
+    modal.style.display = "none";
+  });
+}
+
+// F: suggested activities
 function displayWeather() {
   const geolocationApiKey = process.env.geolocation_API_key;
   const weatherApiKey = process.env.weather_API_key;
   cityInputSubmitButton.innerHTML = "submitted";
   const geolocationUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${cityInput.value}&appid=${geolocationApiKey}`;
   const weatherApiUrl = "https://api.openweathermap.org/data/2.5/onecall";
-  // const cityName = `?q=${cityInput.value}`;
-
-  // const fetchGeolocation = geolocationUrl + geolocationApiKey;
 
   fetch(geolocationUrl)
     .then(function (res) {
@@ -201,10 +207,21 @@ function displayWeather() {
     });
 }
 
-function clearSearchResults() {
-  keywordSearchContainer.innerHTML = "";
+// F: add by category
+function addToPlanByCategory(e) {
+  const newActivityDiv = document.createElement("div");
+  newActivityDiv.classList.add("new-activity");
+  const removeButton = document.createElement("button");
+  removeButton.classList.add("remove-button");
+  removeButton.innerText = "x";
+  newActivityDiv.appendChild(removeButton);
+  const newActivity = document.createElement("li");
+  newActivity.innerText = e.target.innerHTML;
+  newActivityDiv.appendChild(newActivity);
+  personalisedList.appendChild(newActivityDiv);
 }
 
+// F: add by keyword
 async function searchDatabase() {
   const { data, error } = await supabase
     .from("activities")
@@ -223,9 +240,28 @@ async function searchDatabase() {
   keywordSearchContainer.addEventListener("click", addToPlanByKeywordSearch);
 }
 
-function clearInput(input) {
-  input.value = "";
-  input.placeholder = "type here";
+function addToPlanByKeywordSearch(e) {
+  const newActivityDiv = document.createElement("div");
+  newActivityDiv.classList.add("new-activity");
+  const removeButton = document.createElement("button");
+  removeButton.classList.add("remove-button");
+  removeButton.innerText = "x";
+  newActivityDiv.appendChild(removeButton);
+  const newActivity = document.createElement("li");
+  newActivity.innerText = e.target.innerHTML;
+  newActivityDiv.appendChild(newActivity);
+  personalisedList.appendChild(newActivityDiv);
+}
+
+function clearSearchResults() {
+  keywordSearchContainer.innerHTML = "";
+}
+
+// F: add own activity
+async function addNewActivityToDatabase() {
+  const { data } = await supabase
+    .from("activitiesNewInputs")
+    .insert([{ newActivity: `${ownActivityInput.value}` }]);
 }
 
 function addToPlanByOwnActivity() {
@@ -239,35 +275,21 @@ function addToPlanByOwnActivity() {
   const newActivity = document.createElement("li");
   newActivity.innerText = ownActivityInput.value;
   newActivityDiv.appendChild(newActivity);
-  personalisedPlan.appendChild(newActivityDiv);
+  personalisedList.appendChild(newActivityDiv);
 
   clearInput(ownActivityInput);
 }
 
-function addToPlanByCategory(e) {
-  const newActivityDiv = document.createElement("div");
-  newActivityDiv.classList.add("new-activity");
-  const removeButton = document.createElement("button");
-  removeButton.classList.add("remove-button");
-  removeButton.innerText = "x";
-  newActivityDiv.appendChild(removeButton);
-  const newActivity = document.createElement("li");
-  newActivity.innerText = e.target.innerHTML;
-  newActivityDiv.appendChild(newActivity);
-  personalisedPlan.appendChild(newActivityDiv);
-}
-
-function addToPlanByKeywordSearch(e) {
-  const newActivityDiv = document.createElement("div");
-  newActivityDiv.classList.add("new-activity");
-  const removeButton = document.createElement("button");
-  removeButton.classList.add("remove-button");
-  removeButton.innerText = "x";
-  newActivityDiv.appendChild(removeButton);
-  const newActivity = document.createElement("li");
-  newActivity.innerText = e.target.innerHTML;
-  newActivityDiv.appendChild(newActivity);
-  personalisedPlan.appendChild(newActivityDiv);
+// F: Back To Sorts list content
+function updateName() {
+  let userName = nameInput.value;
+  let lastLetterInName = userName.endsWith("s");
+  if (lastLetterInName) {
+    userName.innerHTML = `${userName}'`;
+  } else {
+    userName.innerHTML = `${userName}'s`;
+  }
+  nameInputSubmitButton.innerHTML = "submitted";
 }
 
 function removeActivity() {
@@ -280,15 +302,4 @@ function deleteEntry(e) {
     const entry = item.parentElement;
     entry.remove();
   }
-}
-
-function updateName() {
-  let userName = nameInput.value;
-  let lastLetterInName = userName.endsWith("s");
-  if (lastLetterInName) {
-    nameHTML.innerHTML = `${userName}'`;
-  } else {
-    nameHTML.innerHTML = `${userName}'s`;
-  }
-  nameInputSubmitButton.innerHTML = "submitted";
 }

@@ -1,13 +1,15 @@
-/* Font import */
+/* font import */
 @import url("https://fonts.googleapis.com/css2?family=Tiro+Tamil:ital@0;1&display=swap");
 @font-face {
   font-family: "Palm Springs GRAPHIC";
   src: url(../fonts/PalmSpringsGRAPHIC.woff2);
+  src: url(../fonts/PalmSpringsGRAPHIC.svg);
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
+/* apply to document */
 * {
   margin: 0;
   padding: 0;
@@ -26,7 +28,6 @@ html {
 }
 
 /* header: scroll page 1 (h1) */
-
 header {
   scroll-snap-align: end;
   font-family: "Palm Springs GRAPHIC";
@@ -297,7 +298,7 @@ input {
   width: 68%;
 }
 
-.search-by-keyword-container {
+.keyword-search-container {
   margin-bottom: 2.2rem;
 }
 
@@ -308,8 +309,8 @@ input {
 }
 
 /* navigation bar: Back To Sorts community lists */
-#community-list-winnie,
-#community-list-brendan {
+#winnie,
+#brendan {
   width: 13vh;
   height: auto;
   padding-right: 1vh;
