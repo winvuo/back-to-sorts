@@ -1,7 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 import "dotenv/config";
 
-// fetch databases from Supabase API and render on webpage load
+// fetch databases from Supabase API and render activities sorted by category on webpage load
 const supabaseUrl = "https://srfxftfqnjzhjapmpmlb.supabase.co";
 const supabaseKey = process.env.SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
@@ -30,7 +30,7 @@ async function loadCategories() {
         renderListItem.innerHTML = data.activity;
         renderCategory.appendChild(renderListItem);
 
-        renderListItem.addEventListener("click", addToPlanByCategory);
+        renderListItem.addEventListener("click", addActivityToList);
       }
     });
   });
@@ -78,9 +78,7 @@ nameInput.addEventListener("keydown", (e) => {
 });
 nameInputSubmitButton.addEventListener("click", updateName);
 cityInput.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
-    displayWeather();
-  }
+  if (e.key === "Enter") displayWeather();
 });
 cityInputSubmitButton.addEventListener("click", displayWeather);
 
@@ -90,17 +88,25 @@ communityBrendan.addEventListener("click", displayCommunityModal);
 
 // EL: add by keyword
 keywordInput.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
-    searchDatabase();
-  }
+  if (e.key === "Enter") searchDatabase();
 });
 keywordSearchButton.addEventListener("click", searchDatabase);
-keywordSearchClear.addEventListener("click", clearSearchResults);
+keywordSearchClear.addEventListener("click", () => {
+  keywordSearchContainer.innerHTML = "";
+});
 
 // EL: add own activity
-ownActivitySubmitButton.addEventListener("click", addToPlanByOwnActivity);
+ownActivitySubmitButton.addEventListener("click", () => {
+  addActivityToListByUser();
+  addNewActivityToDatabase();
+  clearInput(ownActivityInput);
+});
 ownActivityInput.addEventListener("keyup", (e) => {
-  if (e.key === "Enter") addToPlanByOwnActivity();
+  if (e.key === "Enter") {
+    addActivityToListByUser();
+    addNewActivityToDatabase();
+    clearInput(ownActivityInput);
+  }
 });
 
 // EL: Back To Sorts list content
@@ -108,12 +114,13 @@ personalisedList.addEventListener("click", deleteEntry);
 
 // ----------> FUNCTIONS <----------
 
+// F: clear input field
 function clearInput(input) {
   input.value = "";
   input.placeholder = "type here";
 }
 
-// F: community lists
+// F: display and hide community list modal
 function displayCommunityModal(e) {
   const modal = document.querySelector(`#modal-${e.target.id}`);
   const overlay = document.querySelector("#overlay");
@@ -129,14 +136,23 @@ function displayCommunityModal(e) {
   });
 }
 
-// F: suggested activities
+// Global variables for "suggested activities" section
+const weatherRelatedSuggestions = document.createElement("details");
+weatherRelatedSuggestions.classList = "rendered-suggestions-text";
+const weatherRelatedSuggestionsSummary = document.createElement("summary");
+const renderWeather = document.createElement("p");
+renderWeather.classList = "rendered-suggestions-weather";
+
+// F: render weather information from 2 x API calls
 function displayWeather() {
   const geolocationApiKey = process.env.geolocation_API_key;
   const weatherApiKey = process.env.weather_API_key;
-  cityInputSubmitButton.innerHTML = "submitted";
   const geolocationUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${cityInput.value}&appid=${geolocationApiKey}`;
   const weatherApiUrl = "https://api.openweathermap.org/data/2.5/onecall";
 
+  cityInputSubmitButton.innerHTML = "submitted";
+
+  // fetch latitude and longitude of the user's city
   fetch(geolocationUrl)
     .then(function (res) {
       return res.json();
@@ -146,12 +162,15 @@ function displayWeather() {
       const latitude = data[0].lat;
       const longitude = data[0].lon;
       const cityName = data[0].name;
+
+      // use geolocation data to fetch weather data from API and render on page
       fetch(
         `${weatherApiUrl}?lat=${latitude}&lon=${longitude}&units=metric&appid=${weatherApiKey}`
       )
         .then(function (response) {
           return response.json();
         })
+        // render weather information
         .then(function (data) {
           const weatherIcon = `http://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png`;
           const img = document.createElement("img");
@@ -160,55 +179,57 @@ function displayWeather() {
 
           const weatherDescription = data.current.weather[0].description;
           const weatherFeelsLike = Math.round(data.current.feels_like);
-          const renderWeather = document.createElement("p");
-          renderWeather.classList = "rendered-suggestions-weather";
+
           renderWeather.innerHTML = `Currently, the weather is ${weatherDescription} and feels like ${weatherFeelsLike}°C in ${cityName}.`;
-
-          const weatherRelatedSuggestions = document.createElement("details");
-          weatherRelatedSuggestions.classList = "rendered-suggestions-text";
-          const weatherRelatedSuggestionsSummary =
-            document.createElement("summary");
-
-          if (weatherDescription.includes("rain")) {
-            weatherRelatedSuggestionsSummary.innerHTML = `Why not go for a walk? Remember to bring your brolly! Click here to see some 'walk' related suggestions.`;
-          } else if (weatherFeelsLike <= 15) {
-            weatherRelatedSuggestionsSummary.innerHTML = `Why not go for a walk? Remember to rug up! Click here to see some 'walk' related suggestions.`;
-          } else if (weatherFeelsLike >= 25) {
-            weatherRelatedSuggestionsSummary.innerHTML = `Why not go for a walk? Remember to stay hydrated! Click here to see some 'walk' related suggestions.`;
-          } else {
-            weatherRelatedSuggestionsSummary.innerHTML = `Why not go for a walk? Click here to see some 'walk' related suggestions.`;
-          }
-
-          weatherRelatedSuggestions.appendChild(
-            weatherRelatedSuggestionsSummary
-          );
-
-          async function searchDatabaseForWalk() {
-            const { data, error } = await supabase
-              .from("activities")
-              .select()
-              .textSearch("activity", "walk");
-
-            data.forEach((data) => {
-              let renderSearchItem = document.createElement("p");
-              renderSearchItem.classList = "rendered-walk-search-text";
-              renderSearchItem.innerHTML = data.activity;
-              weatherRelatedSuggestions.appendChild(renderSearchItem);
-
-              renderSearchItem.addEventListener("click", addToPlanByCategory);
-            });
-          }
-          searchDatabaseForWalk();
 
           suggestionsContainer.appendChild(img);
           suggestionsContainer.appendChild(renderWeather);
-          suggestionsContainer.appendChild(weatherRelatedSuggestions);
+
+          // render walk-related activities from the database as suggestions
+          suggestWalk(weatherFeelsLike);
         });
     });
 }
 
-// F: add by category
-function addToPlanByCategory(e) {
+// F: API call to keyword search the database for "walk"
+async function searchDatabaseForWalk() {
+  const { data, error } = await supabase
+    .from("activities")
+    .select()
+    .textSearch("activity", "walk");
+
+  data.forEach((data) => {
+    let renderSearchItem = document.createElement("p");
+    renderSearchItem.classList = "rendered-walk-search-text";
+    renderSearchItem.innerHTML = data.activity;
+    weatherRelatedSuggestions.appendChild(renderSearchItem);
+
+    renderSearchItem.addEventListener("click", addActivityToList);
+  });
+}
+
+// F: render "walk" suggestions on the page based on weather
+function suggestWalk(weatherFeelsLike) {
+  if (renderWeather.innerHTML.includes("rain")) {
+    weatherRelatedSuggestionsSummary.innerHTML = `Why not go for a walk? Remember to bring your brolly! Click here to see some 'walk' related suggestions.`;
+  } else if (weatherFeelsLike <= 15) {
+    weatherRelatedSuggestionsSummary.innerHTML = `Why not go for a walk? Remember to rug up! Click here to see some 'walk' related suggestions.`;
+  } else if (weatherFeelsLike >= 25) {
+    weatherRelatedSuggestionsSummary.innerHTML = `Why not go for a walk? Remember to stay hydrated! Click here to see some 'walk' related suggestions.`;
+  } else {
+    weatherRelatedSuggestionsSummary.innerHTML = `Why not go for a walk? Click here to see some 'walk' related suggestions.`;
+  }
+
+  weatherRelatedSuggestions.appendChild(weatherRelatedSuggestionsSummary);
+
+  // fetch data from database to render suggestions related to "walk"
+  searchDatabaseForWalk();
+
+  suggestionsContainer.appendChild(weatherRelatedSuggestions);
+}
+
+// F: add activity selected by the user to the Back To Sorts list
+function addActivityToList(e) {
   const newActivityDiv = document.createElement("div");
   newActivityDiv.classList.add("new-activity");
   const removeButton = document.createElement("button");
@@ -221,7 +242,22 @@ function addToPlanByCategory(e) {
   personalisedList.appendChild(newActivityDiv);
 }
 
-// F: add by keyword
+// F: add activity typed by user to the Back To Sorts list
+function addActivityToListByUser() {
+  const newActivityDiv = document.createElement("div");
+  newActivityDiv.classList.add("new-activity");
+  const removeButton = document.createElement("button");
+  removeButton.classList.add("remove-button");
+  removeButton.innerText = "x";
+  newActivityDiv.appendChild(removeButton);
+  const newActivity = document.createElement("li");
+  // value matches input by user
+  newActivity.innerText = ownActivityInput.value;
+  newActivityDiv.appendChild(newActivity);
+  personalisedList.appendChild(newActivityDiv);
+}
+
+// F: add activity by keyword search from database
 async function searchDatabase() {
   const { data, error } = await supabase
     .from("activities")
@@ -237,50 +273,17 @@ async function searchDatabase() {
     keywordSearchContainer.appendChild(renderSearchItem);
   });
 
-  keywordSearchContainer.addEventListener("click", addToPlanByKeywordSearch);
+  keywordSearchContainer.addEventListener("click", addActivityToList);
 }
 
-function addToPlanByKeywordSearch(e) {
-  const newActivityDiv = document.createElement("div");
-  newActivityDiv.classList.add("new-activity");
-  const removeButton = document.createElement("button");
-  removeButton.classList.add("remove-button");
-  removeButton.innerText = "x";
-  newActivityDiv.appendChild(removeButton);
-  const newActivity = document.createElement("li");
-  newActivity.innerText = e.target.innerHTML;
-  newActivityDiv.appendChild(newActivity);
-  personalisedList.appendChild(newActivityDiv);
-}
-
-function clearSearchResults() {
-  keywordSearchContainer.innerHTML = "";
-}
-
-// F: add own activity
+// F: add activity typed by user to the database
 async function addNewActivityToDatabase() {
   const { data } = await supabase
     .from("activitiesNewInputs")
     .insert([{ newActivity: `${ownActivityInput.value}` }]);
 }
 
-function addToPlanByOwnActivity() {
-  addNewActivityToDatabase();
-  const newActivityDiv = document.createElement("div");
-  newActivityDiv.classList.add("new-activity");
-  const removeButton = document.createElement("button");
-  removeButton.classList.add("remove-button");
-  removeButton.innerText = "x";
-  newActivityDiv.appendChild(removeButton);
-  const newActivity = document.createElement("li");
-  newActivity.innerText = ownActivityInput.value;
-  newActivityDiv.appendChild(newActivity);
-  personalisedList.appendChild(newActivityDiv);
-
-  clearInput(ownActivityInput);
-}
-
-// F: Back To Sorts list content
+// F: Back To Sorts list content - update user name on header based on input
 function updateName() {
   let userName = nameInput.value;
   let lastLetterInName = userName.endsWith("s");
@@ -292,10 +295,7 @@ function updateName() {
   nameInputSubmitButton.innerHTML = "submitted";
 }
 
-function removeActivity() {
-  newActivityDiv.firstChild.remove();
-}
-
+// F: Back To Sorts list content - delete an entry from the list
 function deleteEntry(e) {
   const item = e.target;
   if (item.classList[0] === "remove-button") {
