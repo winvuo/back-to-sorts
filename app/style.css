@@ -87,11 +87,6 @@ h1 {
   font-size: 1.6rem;
 }
 
-.intro-description span.active {
-  transform: translateY(0%);
-  transition: 1s ease-out;
-}
-
 #header-image-container {
   height: 45vh;
   position: relative;
@@ -197,6 +192,10 @@ nav {
   width: 25%;
   background: #35432f;
   padding-left: 20px;
+  overflow: scroll;
+}
+
+main {
   overflow: scroll;
 }
 
@@ -382,4 +381,105 @@ main div li {
 
 .remove-button:hover {
   color: #35432f;
+}
+
+/* media queries */
+@media only screen and (max-width: 600px) {
+  /* header: scroll page 1 (h1) */
+  .header-container h1 {
+    font-size: 2rem;
+  }
+
+  /* header: scroll page 2 (intro) */
+  .intro-description {
+    top: 125%;
+  }
+
+  .intro-description li {
+    height: 1rem;
+  }
+
+  .intro-description span {
+    font-size: 0.8rem;
+  }
+
+  img {
+    height: 35vh;
+    width: 35vh;
+  }
+
+  #header-image-container {
+    height: 37vh;
+  }
+
+  #header-image-container a {
+    font-size: 0.5rem;
+  }
+
+  /* header: scroll page 3 (intro form) */
+  .intro-form-description {
+    top: 223%;
+    font-size: 0.8rem;
+  }
+
+  .header-questions {
+    line-height: 0.8rem;
+    font-size: 0.8rem;
+    display: block;
+    padding-bottom: 0.5rem;
+  }
+
+  .intro-form li {
+    display: block;
+    margin-bottom: 2.2rem;
+  }
+
+  .header-submit-button,
+  .header-input {
+    font-size: 0.6rem;
+    display: block;
+  }
+
+  .header-submit-button {
+    width: 70px;
+    margin-top: 5px;
+    margin-left: 72%;
+  }
+
+  .header-input {
+    width: 230px;
+  }
+
+  .intro-form-description-end {
+    height: 1.1rem;
+    font-size: 1.1rem;
+    margin-top: 40px;
+  }
+
+  /* main app */
+
+  nav {
+    width: 80%;
+  }
+
+  main {
+    width: 20%;
+  }
+
+  main:hover {
+    width: 80%;
+    display: block;
+  }
+
+  h2.list-title {
+    margin-left: 1rem;
+    font-size: 1rem;
+  }
+
+  main div {
+    display: flex;
+    align-items: center;
+    margin: 1rem 1rem;
+    font-size: 0.8rem;
+  }
 }

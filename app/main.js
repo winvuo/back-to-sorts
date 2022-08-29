@@ -285,12 +285,12 @@ async function addNewActivityToDatabase() {
 
 // F: Back To Sorts list content - update user name on header based on input
 function updateName() {
-  let userName = nameInput.value;
-  let lastLetterInName = userName.endsWith("s");
+  let userNameInput = nameInput.value;
+  let lastLetterInName = userNameInput.endsWith("s");
   if (lastLetterInName) {
-    userName.innerHTML = `${userName}'`;
+    userName.innerHTML = `${userNameInput}'`;
   } else {
-    userName.innerHTML = `${userName}'s`;
+    userName.innerHTML = `${userNameInput}'s`;
   }
   nameInputSubmitButton.innerHTML = "submitted";
 }
