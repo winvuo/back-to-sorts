@@ -387,7 +387,7 @@ main div li {
 @media only screen and (max-width: 600px) {
   /* header: scroll page 1 (h1) */
   .header-container h1 {
-    font-size: 2rem;
+    font-size: 2.8rem;
   }
 
   /* header: scroll page 2 (intro) */
@@ -400,7 +400,7 @@ main div li {
   }
 
   .intro-description span {
-    font-size: 0.8rem;
+    font-size: 1rem;
   }
 
   img {
@@ -418,13 +418,12 @@ main div li {
 
   /* header: scroll page 3 (intro form) */
   .intro-form-description {
-    top: 223%;
-    font-size: 0.8rem;
+    font-size: 1rem;
   }
 
   .header-questions {
-    line-height: 0.8rem;
-    font-size: 0.8rem;
+    line-height: 1rem;
+    font-size: 1rem;
     display: block;
     padding-bottom: 0.5rem;
   }
@@ -436,7 +435,7 @@ main div li {
 
   .header-submit-button,
   .header-input {
-    font-size: 0.6rem;
+    font-size: 0.8rem;
     display: block;
   }
 
@@ -451,22 +450,29 @@ main div li {
   }
 
   .intro-form-description-end {
-    height: 1.1rem;
-    font-size: 1.1rem;
+    height: 1rem;
+    font-size: 1rem;
     margin-top: 40px;
+  }
+
+  /* modals */
+  #modal-winnie,
+  #modal-brendan {
+    width: 40vh;
   }
 
   /* main app */
 
   nav {
-    width: 80%;
+    width: 20%;
+    color: #35432f;
   }
 
   main {
-    width: 20%;
+    width: 80%;
   }
 
-  main:hover {
+  nav:hover {
     width: 80%;
     display: block;
   }
