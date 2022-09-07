@@ -130,7 +130,7 @@ a {
   top: 230vh;
 }
 
-.intro-form li {
+.intro-form div {
   display: flex;
   overflow: hidden;
   margin-bottom: 0.5rem;
@@ -138,10 +138,11 @@ a {
 }
 
 .intro-form-description-end {
+  position: absolute;
   right: 5%;
+  top: 250vh;
   height: 4rem;
   font-size: 2rem;
-  margin-top: 80px;
   display: none;
 }
 
@@ -195,7 +196,7 @@ nav {
   overflow: scroll;
 }
 
-main {
+section {
   overflow: scroll;
 }
 
@@ -337,7 +338,7 @@ input {
 }
 
 /* back to sorts list content */
-main {
+section {
   width: 75%;
   height: 100vh;
   background: #e3d8e7;
@@ -356,13 +357,13 @@ h2.list-title {
   font-weight: normal;
 }
 
-main div {
+section div {
   display: flex;
   align-items: center;
   margin: 1rem 5rem;
 }
 
-main div li {
+section div li {
   text-align: left;
   padding-top: 0.25rem;
 }
@@ -468,7 +469,7 @@ main div li {
     color: #35432f;
   }
 
-  main {
+  section {
     width: 80%;
   }
 
@@ -482,7 +483,7 @@ main div li {
     font-size: 1rem;
   }
 
-  main div {
+  section div {
     display: flex;
     align-items: center;
     margin: 1rem 1rem;
