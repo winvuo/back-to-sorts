@@ -82,7 +82,7 @@ h1 {
   justify-content: flex-end;
 }
 
-.intro-description span {
+.intro-description p {
   display: block;
   font-size: 1.6rem;
 }
@@ -400,7 +400,7 @@ section div li {
     height: 1rem;
   }
 
-  .intro-description span {
+  .intro-description p {
     font-size: 1rem;
   }
 
