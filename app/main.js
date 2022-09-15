@@ -41,10 +41,10 @@ loadCategories();
 // ----------> QUERY SELECTORS <----------
 
 // QS: intro form
-const nameInput = document.querySelector("#input-name");
+const nameInput = document.querySelector("#first-name");
 const userName = document.querySelector("#user-name");
 const nameInputSubmitButton = document.querySelector("#submit-name");
-const cityInput = document.querySelector("#input-city");
+const cityInput = document.querySelector("#city");
 const cityInputSubmitButton = document.querySelector("#submit-city");
 const textOnFormSubmit = document.querySelector(".intro-form-description-end");
 
