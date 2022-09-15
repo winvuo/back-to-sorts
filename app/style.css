@@ -87,6 +87,11 @@ h1 {
   /* font-size: 1.6rem; */
 }
 
+.intro-description li p {
+  display: block;
+  font-size: 1.3rem;
+}
+
 figure {
   position: absolute;
   top: 143%;
