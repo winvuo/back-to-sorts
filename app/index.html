@@ -13,27 +13,25 @@
   <body>
     <!-- header scroll page 1 (h1) -->
     <header>
-      <div class="header-container">
+      <section class="header-container">
         <h1>back to sorts.</h1>
-      </div>
+      </section>
 
       <!-- header scroll page 2 (intro) -->
-      <div class="intro">
+      <section class="intro">
         <ul class="intro-description">
           <li>
-            <p>Hi, I'm your friendly guide </p>
+            <h2>Hi, I'm your friendly guide </h2>
           </li>
           <li>
-            <p>here with suggestions to help fill your day</p>
+            <h2>here with suggestions to help fill your day</h2>
           </li>
           <li>
-            <p>with the fun little things you need</p>
+            <h2>with the fun little things you need</h2>
           </li>
           <li>
-            <p>when you're feeling ut f srts</p>
+            <h2>when you're feeling ut f srts</h2>
           </li>
-
-          <!-- <li id="header-image-container"> <a href="https://www.instagram.com/niall.breen.comics/?hl=en">source: @niall.breen.comics</a> </li> -->
         </ul>
         <figure>
           <img src="../images/IMG-7591.jpg" alt="feel at ease comic by Niall Breen" id="header-comic">
@@ -41,90 +39,89 @@
             <a href="https://www.instagram.com/niall.breen.comics/?hl=en" target="_blank">@niall.breen.comics</a>
           </figcaption>
         </figure>
-      </div>
+      </section>
 
       <!-- header scroll page 3 (intro form) -->
-      <div class="intro-form">
-        <p class="intro-form-description">To get personalised suggestions, provide</p>
+      <section class="intro-form">
+        <h2 class="intro-form-description">To get personalised suggestions, provide</h2>
         <form>
-          <div class="header-question-container">
-            <label class="header-questions">your first name</label>
-            <input class="header-input" id="input-name" type="text" placeholder="enter your first name">
+          <fieldset class="header-question-container">
+            <label for="first_name" class="header-questions">
+              your first name
+              <input class="header-input" id="input-name" type="text" placeholder="enter your first name"/>
+            </label>
             <button type="button" class="header-submit-button" id="submit-name">submit</button>
-          </div>
-          <div class="header-question-container">
-            <label class="header-questions">the city you're located</label>
-            <input class="header-input" id="input-city" type="text" placeholder="enter your city">
+          </fieldset>
+          <fieldset class="header-question-container">
+            <label for="city_you're_located" class="header-questions">
+              the city you're located
+              <input class="header-input" id="input-city" type="text" placeholder="enter your city">
+            </label>
             <button type="button" class="header-submit-button" id="submit-city">submit</button>
-          </div>
+          </fieldset>
         </form>
-        <span class="intro-form-description-end">Now let's get Back To Srts!</span>
-      </div>
-
+        <h2 class="intro-form-description-end">Now let's get Back To Srts!</h2>
+      </section>
     </header>
 
     <!-- main app -->
     <main class="app">
-
       <!-- navigation bar -->
       <nav class="navbar">
-
         <!-- heading: you can start here -->
-        <div class="community">
-          <label class="navbar-heading">you can start here</label>
-          <div class="community-container">
-            <p class="start-here-text">
-              Your Back To Sorts list should be used however works best for you.<br>Some refer to it as a reminder of the things that help them reorient if they're feeling out of sorts. Others may use it as a daily self-care checklist. Others may use it as a flexible guideline for their day. Others may share it with loved ones.<br><br>Click below to see lists shared by our Back To Sorts community. We hope that it provides ideas, support, and a starting point to build your personal Back To Sorts list.
-            </p>
-            <div>
-              <img src="../images/winnie-list.png" alt="winnies-back-to-sorts-list" id="winnie">
-              <img src="../images/brendan-list.png" alt="brendans-back-to-sorts-list" id="brendan">
-            </div>
-            <div>
-              <img src="../images/winnie-list.png" alt="winnies-back-to-sorts-list" id="modal-winnie">
-              <img src="../images/brendan-list.png" alt="brendans-back-to-sorts-list" id="modal-brendan">
-            </div>
-            <div id="overlay"></div>
+        <section class="community">
+          <h3 class="navbar-heading">you can start here</h3>
+          <p class="start-here-text">
+            Your Back To Sorts list should be used however works best for you.<br>Some refer to it as a reminder of the things that help them reorient if they're feeling out of sorts. Others may use it as a daily self-care checklist. Others may use it as a flexible guideline for their day. Others may share it with loved ones.<br><br>Click below to see lists shared by our Back To Sorts community. We hope that it provides ideas, support, and a starting point to build your personal Back To Sorts list.
+          </p>
+          <div>
+            <img src="../images/winnie-list.png" alt="winnies-back-to-sorts-list" id="winnie">
+            <img src="../images/brendan-list.png" alt="brendans-back-to-sorts-list" id="brendan">
           </div>
-        </div>
+          <div>
+            <img src="../images/winnie-list.png" alt="winnies-back-to-sorts-list" id="modal-winnie">
+            <img src="../images/brendan-list.png" alt="brendans-back-to-sorts-list" id="modal-brendan">
+          </div>
+          <div id="overlay"></div>
+        </section>
 
         <!-- heading: suggested activities -->
-        <div class="suggestions">
-          <label class="navbar-heading" id="activity-suggestions">suggested activities</label>
+        <section class="suggestions">
+          <h3 class="navbar-heading" id="activity-suggestions">suggested activities</h3>
           <div class="suggestions-container"></div>
-        </div>
+        </section>
 
         <!-- heading: add by category -->
-        <div id="search-by-category">
-          <label class="navbar-heading">add activity by
+        <section id="search-by-category">
+          <h3 class="navbar-heading">add activity by
             <i>category</i>
-          </label>
+          </h3>
           <div class="search-by-category-container"></div>
-        </div>
+        </section>
 
         <!-- heading: add by keyword search -->
-        <div id="search-by-keyword">
-          <label class="navbar-heading">add activity by
+        <section id="search-by-keyword">
+          <h3 class="navbar-heading">add activity by
             <i>keyword search</i>
-          </label>
+          </h3>
           <input class="search-by-keyword" placeholder="type a keyword">
           <button class="search-by-keyword">search</button>
           <button class="search-by-keyword-clear">clear</button>
-          <div class="keyword-search-container"></div>
-        </div>
+          <section class="keyword-search-container"></section>
+        </section>
 
         <!-- heading: can't find it? add your personalised activity -->
-        <div id="add-your-own">
-          <label class="navbar-heading">can't find it?<br>add your
+        <section id="add-your-own">
+          <h3 class="navbar-heading">can't find it?<br>add your
             <i>personalised activity</i>
-          </label>
+          </h3>
           <input class="add-my-own" placeholder="type an activity">
           <button class="add-my-own">add</button>
-        </div>
+        </section>
       </nav>
 
       <!-- back to sorts list content -->
-      <section>
+      <section id="list-content">
         <h2 class="list-title">
           <span id="user-name">
             My</span>

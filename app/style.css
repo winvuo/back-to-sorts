@@ -82,9 +82,9 @@ h1 {
   justify-content: flex-end;
 }
 
-.intro-description p {
+.intro-description li h2 {
   display: block;
-  font-size: 1.6rem;
+  /* font-size: 1.6rem; */
 }
 
 figure {
@@ -129,11 +129,12 @@ img {
   top: 230vh;
 }
 
-.intro-form div {
+.intro-form fieldset {
   display: flex;
   overflow: hidden;
   margin-bottom: 0.5rem;
   justify-content: flex-end;
+  border: none;
 }
 
 .intro-form-description-end {
@@ -141,7 +142,7 @@ img {
   right: 5%;
   top: 250vh;
   height: 4rem;
-  font-size: 2rem;
+  font-size: 1.8rem;
   display: none;
 }
 
@@ -192,10 +193,6 @@ nav {
   width: 25%;
   background: #35432f;
   padding-left: 20px;
-  overflow: scroll;
-}
-
-section {
   overflow: scroll;
 }
 
@@ -337,10 +334,14 @@ input {
 }
 
 /* back to sorts list content */
-section {
+
+main {
+  background: #e3d8e7;
+}
+
+section #list-content {
   width: 75%;
   height: 100vh;
-  background: #e3d8e7;
   display: absolute;
   justify-content: center;
   align-items: center;
@@ -356,13 +357,13 @@ h2.list-title {
   font-weight: normal;
 }
 
-section div {
+#list-content article {
   display: flex;
   align-items: center;
   margin: 1rem 5rem;
 }
 
-section div li {
+#list-content article li {
   text-align: left;
   padding-top: 0.25rem;
 }

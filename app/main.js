@@ -230,31 +230,31 @@ function suggestWalk(weatherFeelsLike) {
 
 // F: add activity selected by the user to the Back To Sorts list
 function addActivityToList(e) {
-  const newActivityDiv = document.createElement("div");
-  newActivityDiv.classList.add("new-activity");
+  const newActivityArticle = document.createElement("article");
+  newActivityArticle.classList.add("new-activity");
   const removeButton = document.createElement("button");
   removeButton.classList.add("remove-button");
   removeButton.innerText = "x";
-  newActivityDiv.appendChild(removeButton);
+  newActivityArticle.appendChild(removeButton);
   const newActivity = document.createElement("li");
   newActivity.innerText = e.target.innerHTML;
-  newActivityDiv.appendChild(newActivity);
-  personalisedList.appendChild(newActivityDiv);
+  newActivityArticle.appendChild(newActivity);
+  personalisedList.appendChild(newActivityArticle);
 }
 
 // F: add activity typed by user to the Back To Sorts list
 function addActivityToListByUser() {
-  const newActivityDiv = document.createElement("div");
-  newActivityDiv.classList.add("new-activity");
+  const newActivityArticle = document.createElement("article");
+  newActivityArticle.classList.add("new-activity");
   const removeButton = document.createElement("button");
   removeButton.classList.add("remove-button");
   removeButton.innerText = "x";
-  newActivityDiv.appendChild(removeButton);
+  newActivityArticle.appendChild(removeButton);
   const newActivity = document.createElement("li");
   // value matches input by user
   newActivity.innerText = ownActivityInput.value;
-  newActivityDiv.appendChild(newActivity);
-  personalisedList.appendChild(newActivityDiv);
+  newActivityArticle.appendChild(newActivity);
+  personalisedList.appendChild(newActivityArticle);
 }
 
 // F: add activity by keyword search from database
