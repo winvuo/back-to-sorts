@@ -22,12 +22,14 @@ It is my hope that the Back To Sorts project will provide a tool and a supportiv
 
 ## Tech Stack
 
-| Languages | HTML5 <br/>CSS <br/>JavaScript(ES6) |
-| Technologies | APIs <br/>AJAX <br/>DotEnv |
-| Database | Supabase |
-| Build Tool | Parcel |
-| Deployment | Vercel |
-| Source Control | Git <br/>GitHub |
+| Tech Stack       |                                     |
+| ---------------- | ----------------------------------- |
+| `Languages`      | HTML5 <br/>CSS <br/>JavaScript(ES6) |
+| `Technologies`   | APIs <br/>AJAX <br/>DotEnv          |
+| `Database`       | Supabase                            |
+| `Build Tool`     | Parcel                              |
+| `Deployment`     | Vercel                              |
+| `Source Control` | Git <br/>GitHub                     |
 
 ## Code Walk-Through
 
