@@ -20,8 +20,6 @@ My project, Back To Sorts, is a space for visitors to reflect, reorient, and fin
 A Back To Sorts list can be used however works best for each individual: such as, a personal guide to help find balance in times of need, a weekly self-care checklist, a reference used to plan free time, or a tool to share with supportive loved-ones.
 It is my hope that the Back To Sorts project will provide a tool and a supportive community that prompts us to set aside time for rejuvenation and brighten our days.
 
-## Tech Stack
-
 | Tech Stack       |                                     |
 | ---------------- | ----------------------------------- |
 | `Languages`      | HTML5 <br/>CSS <br/>JavaScript(ES6) |
