@@ -2,7 +2,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Tiro+Tamil:ital@0;1&display=swap");
 @font-face {
   font-family: "Palm Springs GRAPHIC";
-  src: url(../fonts/PalmSpringsGRAPHIC.woff2);
+  src: url(../assets/fonts/PalmSpringsGRAPHIC.woff2) format("woff2"),
+    url(../assets/fonts/PalmSpringsGRAPHIC.woff) format("woff"),
+    url(../assets/fonts/PalmSpringsGRAPHIC.ttf) format("truetype"),
+    url(../assets/fonts/PalmSpringsGRAPHIC.svg#PalmSpringsGRAPHIC) format("svg");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -74,21 +77,12 @@ h1 {
   justify-content: flex-end;
 }
 
-.intro-description li {
+.intro-description p {
   height: 3rem;
   display: flex;
   overflow: hidden;
   margin-bottom: 0.5rem;
   justify-content: flex-end;
-}
-
-.intro-description li h2 {
-  display: block;
-  /* font-size: 1.6rem; */
-}
-
-.intro-description li p {
-  display: block;
   font-size: 1.3rem;
 }
 

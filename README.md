@@ -23,7 +23,7 @@ It is my hope that the Back To Sorts project will provide a tool and a supportiv
 | Tech Stack       |                                     |
 | ---------------- | ----------------------------------- |
 | `Languages`      | HTML5 <br/>CSS <br/>JavaScript(ES6) |
-| `Technologies`   | APIs <br/>AJAX <br/>DotEnv          |
+| `Procedures`     | APIs <br/>AJAX <br/>DotEnv          |
 | `Database`       | Supabase                            |
 | `Build Tool`     | Parcel                              |
 | `Deployment`     | Vercel                              |
@@ -62,5 +62,7 @@ The remainder of the main.js file is structured into 3 sections:
 - Use the Instagram API to show posts from the community.
 - Expand the activity database.
 - Add and improve accessibility.
+- Add user authentication.
+- Integrate a screenshot API to allow users to save a copy of their Back To Sorts list.
 
 As I continue to learn, the next big step will be to migrate the app to React.

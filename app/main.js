@@ -15,9 +15,9 @@ async function loadCategories() {
 
   categories.forEach((data) => {
     const renderCategory = document.createElement("details");
-    renderCategory.classList = "rendered-category-text";
+    renderCategory.classList.add("rendered-category-text");
     const summary = document.createElement("summary");
-    summary.innerHTML = `${data.category_name}`;
+    summary.innerHTML = data.category_name;
     renderCategory.appendChild(summary);
     categoryContainer.appendChild(renderCategory);
 
@@ -26,7 +26,7 @@ async function loadCategories() {
     activities.forEach((data) => {
       if (data.category === dataID) {
         let renderListItem = document.createElement("p");
-        renderListItem.classList = "rendered-category-activity-text";
+        renderListItem.classList.add("rendered-category-activity-text");
         renderListItem.innerHTML = data.activity;
         renderCategory.appendChild(renderListItem);
 
@@ -43,10 +43,12 @@ loadCategories();
 // QS: intro form
 const nameInput = document.querySelector("#first-name");
 const userName = document.querySelector("#user-name");
-const nameInputSubmitButton = document.querySelector("#submit-name");
-const cityInput = document.querySelector("#city");
-const cityInputSubmitButton = document.querySelector("#submit-city");
 const textOnFormSubmit = document.querySelector(".intro-form-description-end");
+
+const form = document.querySelector("form");
+const nameInputSubmitButton = form.querySelector("#submit-name");
+const cityInput = form.querySelector("#city");
+const cityInputSubmitButton = form.querySelector("#submit-city");
 
 // QS: community lists
 const communityWinnie = document.querySelector("#winnie");
@@ -96,16 +98,34 @@ keywordSearchClear.addEventListener("click", () => {
 });
 
 // EL: add own activity
+// included error handling for empty spaces
 ownActivitySubmitButton.addEventListener("click", () => {
-  addActivityToListByUser();
-  addNewActivityToDatabase();
-  clearInput(ownActivityInput);
-});
-ownActivityInput.addEventListener("keyup", (e) => {
-  if (e.key === "Enter") {
+  if (
+    typeof ownActivityInput.value !== "string" ||
+    ownActivityInput.value.trim() === ""
+  ) {
+    clearInput(ownActivityInput);
+    ownActivityInput.placeholder = "oops. type your activity again.";
+  } else {
     addActivityToListByUser();
     addNewActivityToDatabase();
     clearInput(ownActivityInput);
+  }
+});
+
+ownActivityInput.addEventListener("keyup", (e) => {
+  if (e.key === "Enter") {
+    if (
+      typeof ownActivityInput.value !== "string" ||
+      ownActivityInput.value.trim() === ""
+    ) {
+      clearInput(ownActivityInput);
+      ownActivityInput.placeholder = "oops. type your activity again.";
+    } else {
+      addActivityToListByUser();
+      addNewActivityToDatabase();
+      clearInput(ownActivityInput);
+    }
   }
 });
 
@@ -262,16 +282,20 @@ async function searchDatabase() {
   const { data, error } = await supabase
     .from("activities")
     .select()
-    .textSearch("activity", `${keywordInput.value}`);
+    .textSearch("activity", keywordInput.value);
 
   clearInput(keywordInput);
 
-  data.forEach((data) => {
-    let renderSearchItem = document.createElement("li");
-    renderSearchItem.classList = "rendered-keyword-search-text";
-    renderSearchItem.innerHTML = data.activity;
-    keywordSearchContainer.appendChild(renderSearchItem);
-  });
+  if (data.length === 0) {
+    keywordInput.placeholder = "oops, no match found.";
+  } else {
+    data.forEach((data) => {
+      let renderSearchItem = document.createElement("li");
+      renderSearchItem.classList.add("rendered-keyword-search-text");
+      renderSearchItem.innerHTML = data.activity;
+      keywordSearchContainer.appendChild(renderSearchItem);
+    });
+  }
 
   keywordSearchContainer.addEventListener("click", addActivityToList);
 }
@@ -280,7 +304,7 @@ async function searchDatabase() {
 async function addNewActivityToDatabase() {
   const { data } = await supabase
     .from("activitiesNewInputs")
-    .insert([{ newActivity: `${ownActivityInput.value}` }]);
+    .insert([{ newActivity: ownActivityInput.value }]);
 }
 
 // F: Back To Sorts list content - update user name on header based on input
@@ -288,7 +312,7 @@ function updateName() {
   let userNameInput = nameInput.value;
   let lastLetterInName = userNameInput.endsWith("s");
   if (lastLetterInName) {
-    userName.innerHTML = `${userNameInput}'`;
+    userName.innerHTML = userNameInput;
   } else {
     userName.innerHTML = `${userNameInput}'s`;
   }
@@ -298,7 +322,7 @@ function updateName() {
 // F: Back To Sorts list content - delete an entry from the list
 function deleteEntry(e) {
   const item = e.target;
-  if (item.classList[0] === "remove-button") {
+  if (item.classList.contains("remove-button")) {
     const entry = item.parentElement;
     entry.remove();
   }

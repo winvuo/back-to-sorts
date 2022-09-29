@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Back to Sorts</title>
-    <link rel="icon" href="../images/smiley-icon.png" type="image/x-icon"/>
-    <link rel="stylesheet" href="style.css"/>
+    <link
+      rel="icon"
+      href="../assets/images/smiley-icon.png"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
@@ -19,24 +22,24 @@
 
       <!-- header scroll page 2 (intro) -->
       <section class="intro">
-        <ul class="intro-description">
-          <li>
-            <h2>Hi, I'm your friendly guide </h2>
-          </li>
-          <li>
-            <p>I'm here with ideas to help fill your day</p>
-          </li>
-          <li>
-            <p>with the fun little things you need</p>
-          </li>
-          <li>
-            <p>when you're feeling ut f srts.</p>
-          </li>
-        </ul>
+        <div class="intro-description">
+          <p>Hi, I'm your friendly guide </p>
+          <p>I'm here with ideas to help fill your day</p>
+          <p>with the fun little things you need</p>
+          <p>when you're feeling ut f srts.</p>
+        </div>
         <figure>
-          <img src="../images/IMG-7591.jpg" alt="feel at ease comic by Niall Breen" id="header-comic">
+          <img
+            src="../assets/images/IMG-7591.jpg"
+            alt="feel at ease comic by Niall Breen"
+            id="header-comic"
+          />
           <figcaption>
-            <a href="https://www.instagram.com/niall.breen.comics/?hl=en" target="_blank">@niall.breen.comics</a>
+            <a
+              href="https://www.instagram.com/niall.breen.comics/?hl=en"
+              target="_blank"
+              >@niall.breen.comics</a
+            >
           </figcaption>
         </figure>
       </section>
@@ -49,15 +52,29 @@
             <label for="first-name" class="header-questions">
               provide your first name
             </label>
-            <input class="header-input" id="first-name" type="text" placeholder="enter your first name"/>
-            <button type="button" class="header-submit-button" id="submit-name">submit</button>
+            <input
+              class="header-input"
+              id="first-name"
+              type="text"
+              placeholder="enter your first name"
+            />
+            <button type="button" class="header-submit-button" id="submit-name">
+              submit
+            </button>
           </fieldset>
           <fieldset class="header-question-container">
             <label for="city" class="header-questions">
               provide the city you're located
             </label>
-            <input class="header-input" id="city" type="text" placeholder="enter your city">
-            <button type="button" class="header-submit-button" id="submit-city">submit</button>
+            <input
+              class="header-input"
+              id="city"
+              type="text"
+              placeholder="enter your city"
+            />
+            <button type="button" class="header-submit-button" id="submit-city">
+              submit
+            </button>
           </fieldset>
         </form>
         <p class="intro-form-description-end">Now let's get Back To Srts!</p>
@@ -72,28 +89,54 @@
         <section class="community">
           <h3 class="navbar-heading">you can start here</h3>
           <p class="start-here-text">
-            Your Back To Sorts list should be used however works best for you.<br>Some refer to it as a reminder of the things that help them reorient if they're feeling out of sorts. Others may use it as a daily self-care checklist. Others may use it as a flexible guideline for their day. Others may share it with loved ones.<br><br>Click below to see lists shared by our Back To Sorts community. We hope that it provides ideas, support, and a starting point to build your personal Back To Sorts list.
+            Your Back To Sorts list should be used however works best for
+            you.<br />Some refer to it as a reminder of the things that help
+            them reorient if they're feeling out of sorts. Others may use it as
+            a daily self-care checklist. Others may use it as a flexible
+            guideline for their day. Others may share it with loved ones.<br /><br />Click
+            below to see lists shared by our Back To Sorts community. We hope
+            that it provides ideas, support, and a starting point to build your
+            personal Back To Sorts list.
           </p>
           <div>
-            <img src="../images/winnie-list.png" alt="winnies-back-to-sorts-list" id="winnie">
-            <img src="../images/brendan-list.png" alt="brendans-back-to-sorts-list" id="brendan">
+            <img
+              src="../assets/images/winnie-list.png"
+              alt="winnies-back-to-sorts-list"
+              id="winnie"
+            />
+            <img
+              src="../assets/images/brendan-list.png"
+              alt="brendans-back-to-sorts-list"
+              id="brendan"
+            />
           </div>
           <div>
-            <img src="../images/winnie-list.png" alt="winnies-back-to-sorts-list" id="modal-winnie">
-            <img src="../images/brendan-list.png" alt="brendans-back-to-sorts-list" id="modal-brendan">
+            <img
+              src="../assets/images/winnie-list.png"
+              alt="winnies-back-to-sorts-list"
+              id="modal-winnie"
+            />
+            <img
+              src="../assets/images/brendan-list.png"
+              alt="brendans-back-to-sorts-list"
+              id="modal-brendan"
+            />
           </div>
           <div id="overlay"></div>
         </section>
 
         <!-- heading: suggested activities -->
         <section class="suggestions">
-          <h3 class="navbar-heading" id="activity-suggestions">suggested activities</h3>
+          <h3 class="navbar-heading" id="activity-suggestions">
+            suggested activities
+          </h3>
           <div class="suggestions-container"></div>
         </section>
 
         <!-- heading: add by category -->
         <section id="search-by-category">
-          <h3 class="navbar-heading">add activity by
+          <h3 class="navbar-heading">
+            add activity by
             <i>category</i>
           </h3>
           <div class="search-by-category-container"></div>
@@ -101,10 +144,11 @@
 
         <!-- heading: add by keyword search -->
         <section id="search-by-keyword">
-          <h3 class="navbar-heading">add activity by
+          <h3 class="navbar-heading">
+            add activity by
             <i>keyword search</i>
           </h3>
-          <input class="search-by-keyword" placeholder="type a keyword">
+          <input class="search-by-keyword" placeholder="type a keyword" />
           <button class="search-by-keyword">search</button>
           <button class="search-by-keyword-clear">clear</button>
           <div class="keyword-search-container"></div>
@@ -112,10 +156,11 @@
 
         <!-- heading: can't find it? add your personalised activity -->
         <section id="add-your-own">
-          <h3 class="navbar-heading">can't find it?<br>add your
+          <h3 class="navbar-heading">
+            can't find it?<br />add your
             <i>personalised activity</i>
           </h3>
-          <input class="add-my-own" placeholder="type an activity">
+          <input class="add-my-own" placeholder="type an activity" />
           <button class="add-my-own">add</button>
         </section>
       </nav>
@@ -123,16 +168,13 @@
       <!-- back to sorts list content -->
       <section id="list-content">
         <h2 class="list-title">
-          <span id="user-name">
-            My</span>
-          Back To Srts List</h2>
+          <span id="user-name"> My</span>
+          Back To Srts List
+        </h2>
         <ul class="list-container"></ul>
       </section>
-
     </main>
 
     <script src="main.js" type="module"></script>
-
   </body>
-
 </html>
